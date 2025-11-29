@@ -3,228 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator & Life Stats - XizoaHub</title>
-    <meta name="description" content="Calculate your exact age, zodiac sign, next birthday countdown, and total life stats instantly. Best Age Calculator tool by XizoaHub.">
+    <title>Premium Life Stats Card - XizoaHub</title>
+    <meta name="description" content="Generate your premium life stats card with age, zodiac, and a unique random bio. Download and share instantly.">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         :root {
             --bg-color: #050505;
-            --card-bg: #111111;
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
             --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --accent-green: #10b981;
-            --border-color: #27272a;
+            /* Premium Colors */
+            --card-dark: #0c0c0e;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --blue-gradient: linear-gradient(135deg, #3b82f6, #1d4ed8);
             --font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding-bottom: 50px; }
 
-        /* Navbar & Mobile Menu (Same as before) */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); position: relative; z-index: 100; }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; color: white; text-decoration: none; }
-        .badge { background-color: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
-        .menu-icon { cursor: pointer; padding: 5px; }
-        .mobile-menu { display: none; position: absolute; top: 60px; right: 1.5rem; background-color: #18181b; border: 1px solid var(--border-color); width: 200px; padding: 0.5rem; border-radius: 8px; flex-direction: column; z-index: 999; }
-        .mobile-menu.active { display: flex; }
-        .mobile-menu a { color: var(--text-muted); text-decoration: none; padding: 10px; border-radius: 6px; }
-        .mobile-menu a:hover { background-color: var(--accent-blue); color: white; }
+        /* Navbar (Same as before) */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #27272a; background-color: var(--bg-color); }
+        .logo { font-weight: 800; font-size: 1.2rem; color: white; text-decoration: none; }
+        .badge { background: var(--blue-gradient); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
 
-        /* Main Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
 
         /* Input Section */
-        .tool-card { background-color: #0f1014; border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
-        .input-group { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto; }
-        input[type="date"] { background-color: #000; border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; color: white; width: 100%; color-scheme: dark; }
-        .btn-calculate { background-color: var(--accent-blue); color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .input-card { background-color: #0f1014; border: 1px solid #27272a; border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+        input[type="date"] { background-color: #000; border: 1px solid #27272a; padding: 12px; border-radius: 6px; color: white; width: 100%; color-scheme: dark; margin-bottom: 1rem; max-width: 300px;}
+        .btn-calculate { background: var(--blue-gradient); color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
+        .btn-calculate:hover { transform: scale(1.05); }
         
-        /* RESULT GRID (Unique Feature) */
-        #resultSection { display: none; margin-top: 2rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        /* --- PREMIUM CARD STYLES --- */
+        #resultSection { display: none; margin-top: 3rem; }
         
-        .stat-box { background: #18181b; padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); text-align: left; }
-        .stat-box h3 { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-value { font-size: 1.4rem; font-weight: 700; color: white; }
-        .highlight-blue { color: var(--accent-blue); }
-        .highlight-purple { color: var(--accent-purple); }
-        .highlight-green { color: var(--accent-green); }
+        /* The container that gets downloaded */
+        .premium-card-container {
+            background: var(--card-dark);
+            border-radius: 20px;
+            padding: 3px; /* For gradient border effect */
+            background-image: var(--gold-gradient);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
+            max-width: 450px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
 
-        /* Extra Info */
-        .fun-fact { margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.05); border-left: 3px solid var(--accent-blue); border-radius: 4px; text-align: left; font-size: 0.9rem; color: #d4d4d8; }
+        .premium-card-inner {
+            background: #08080a;
+            border-radius: 18px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            /* Subtle texture */
+            background-image: radial-gradient(circle at top right, rgba(191, 149, 63, 0.1) 0%, transparent 60%);
+        }
 
-        /* Content Text */
-        .content-section { margin-top: 3rem; }
-        h2 { font-size: 1.4rem; margin-top: 2rem; color: #fff; }
-        p { color: var(--text-muted); margin-bottom: 1rem; }
-        footer { border-top: 1px solid var(--border-color); padding: 2rem 1rem; margin-top: 4rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .main-stat {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 1rem 0;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .sub-stat { color: var(--text-muted); font-size: 0.9rem; }
+
+        .grid-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 1.5rem 0;
+        }
+        .grid-item h4 { color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; }
+        .grid-item div { font-size: 1.2rem; font-weight: 700; margin-top: 5px; color: #e4e4e7; }
+
+        /* RANDOM BIO SECTION */
+        .bio-section {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #fcf6ba; /* Gold tint text */
+            font-size: 0.95rem;
+            border-left: 3px solid #bf953f;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-tag {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-action {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+        .btn-download { background: var(--gold-gradient); color: #2c1a00; }
+        .btn-share { background: #333; color: white; border: 1px solid #444; }
+        .btn-action:hover { opacity: 0.9; }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-area">
-            <a href="#" class="logo">XIZOAHUB</a>
-            <div class="badge">Pro Tool</div>
-        </div>
-        <div class="menu-icon" onclick="toggleMenu()">
-             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#">🏠 Home</a>
-            <a href="#">🔥 Trending Tools</a>
-            <a href="#">📞 Contact</a>
-        </div>
+        <div class="logo">XIZOAHUB</div>
+        <div class="badge">Premium Tools</div>
     </nav>
 
     <div class="container">
         
-        <div class="tool-card">
-            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Age Calculator & Life Stats</h1>
-            <p style="color: #a1a1aa; margin-bottom: 2rem;">Sirf Age nahi, apni poori Kundli (Stats) dekho.</p>
-
-            <div class="input-group">
-                <input type="date" id="dobInput">
-                <button class="btn-calculate" onclick="calculateStats()">Analyze My Life</button>
-            </div>
+        <div class="input-card">
+            <h1 style="font-size: 1.8rem; margin-bottom: 1rem;">Generate Your Life Card</h1>
+            <input type="date" id="dobInput">
+            <br>
+            <button class="btn-calculate" onclick="generateCard()">Unlock My Card ✨</button>
         </div>
 
         <div id="resultSection">
-            <div class="stats-grid">
-                <div class="stat-box" style="border-color: var(--accent-blue);">
-                    <h3>Current Age</h3>
-                    <div class="stat-value highlight-blue" id="exactAge">0 Years</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;" id="exactDays">0 Days</div>
-                </div>
+            
+            <div class="premium-card-container" id="downloadableCard">
+                <div class="premium-card-inner">
+                    <div class="card-header">
+                        <span class="card-title">Official Life Stats</span>
+                    </div>
 
-                <div class="stat-box" style="border-color: var(--accent-purple);">
-                    <h3>Next Birthday In</h3>
-                    <div class="stat-value highlight-purple" id="nextBday">0 Days</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Party ready rakho!</div>
-                </div>
+                    <div class="main-stat" id="cardAge">0 YEARS</div>
+                    <div class="sub-stat" id="cardDetails">0 Months, 0 Days Earth Time</div>
 
-                <div class="stat-box" style="border-color: var(--accent-green);">
-                    <h3>Zodiac Sign</h3>
-                    <div class="stat-value highlight-green" id="zodiacSign">-</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Astrology check.</div>
-                </div>
+                    <div class="grid-stats">
+                        <div class="grid-item">
+                            <h4>Next Level (B'day)</h4>
+                            <div id="cardNextBday">0 Days</div>
+                        </div>
+                        <div class="grid-item">
+                            <h4>Character Class</h4>
+                            <div id="cardZodiac">-</div>
+                        </div>
+                    </div>
 
-                <div class="stat-box">
-                    <h3>Total Hours Lived</h3>
-                    <div class="stat-value" id="totalHours">0</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Itna time spend kiya dharti pe.</div>
-                </div>
+                    <div class="bio-section" id="cardBio">
+                        Calculating your vibe...
+                    </div>
 
-                 <div class="stat-box">
-                    <h3>Born On</h3>
-                    <div class="stat-value" id="birthDayName">-</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Day of the week.</div>
-                </div>
-
-                 <div class="stat-box">
-                    <h3>Time Spent Sleeping</h3>
-                    <div class="stat-value" id="sleepTime">0 Years</div>
-                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">(Approx 8 hours/day)</div>
+                    <div class="brand-tag">XIZOAHUB.COM</div>
                 </div>
             </div>
 
-            <div class="fun-fact" id="summaryLine">
-                Result loaded successfully.
+            <div class="action-buttons">
+                <button class="btn-action btn-download" onclick="downloadImage()">
+                    ⬇️ Download Card
+                </button>
+                <button class="btn-action btn-share" onclick="shareText()">
+                    ↗️ Share Link
+                </button>
             </div>
-        </div>
 
-        <div class="content-section">
-            <h2>Why This Tool is Different?</h2>
-            <p>
-                Ye bas simple age calculator nahi hai. Ye tumhari life ka ek mini-dashboard hai. Hum calculate karte hain tumhare total ghante, tumhara aane wala birthday aur tumhari zodiac sign. 
-            </p>
-            <h2>How It Works?</h2>
-            <p>JavaScript ke complex algorithms use karke hum Gregorian calendar ke hisaab se tumhara data process karte hain. Data browser me hi rehta hai, safe & secure.</p>
         </div>
 
     </div>
 
-    <footer>
-        <p>&copy; 2024-2025 XizoaHub. Built for curious minds.</p>
-    </footer>
-
     <script>
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-        }
+        // --- 1. Random Bios Database (Hinglish Style) ---
+        const bioList = [
+            "Dharti pe bohot time ho gaya, abhi tak update nahi aaya. 🤔",
+            "Professional procrastinator since birth. Abhi tak zinda hoon, yahi achievement hai.",
+            "Main itna purana hoon ki maine internet ko slow chalte hue dekha hai.",
+            "Life ka free trial khatam hone wala hai, subscription mehenga hai. 💸",
+            "Zindagi ek safar hai, aur main shayad galat train me hoon.",
+            "Age is just a number, but my knees disagree. 🦴",
+            "Successfully converting oxygen into carbon dioxide for years. Good job me.",
+            "Main Monday ko paida hua tha, tabhi life me itni thakaan hai.",
+            "Statutory Warning: Ye insaan abhi under construction hai. 🚧",
+            "Collecting years like Pokémons. Gotta catch 'em all!",
+            "Itne saal ho gaye, par samajh nahi aaya ki bade hokar banna kya tha.",
+            "Vibe check: Currently surviving on caffeine and hope. ☕"
+        ];
 
-        function calculateStats() {
+        function generateCard() {
             const dobInput = document.getElementById('dobInput').value;
-            if (!dobInput) { alert("Please select a date first!"); return; }
-
+            if (!dobInput) { alert("Date select karo pehle!"); return; }
             const dob = new Date(dobInput);
             const today = new Date();
+            if (dob > today) { alert("Future me mat jao bhai!"); return; }
 
-            if (dob > today) { alert("Future date not allowed!"); return; }
-
-            // 1. Exact Age
+            // --- Calculations (Same as before) ---
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
             let days = today.getDate() - dob.getDate();
             if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
             if (months < 0) { years--; months += 12; }
-            document.getElementById('exactAge').innerText = `${years} Years`;
-            document.getElementById('exactDays').innerText = `${months} Months, ${days} Days`;
 
-            // 2. Next Birthday Countdown
             const currentYear = today.getFullYear();
-            let nextBirthday = new Date(dob.getMonth() + 1 + '/' + dob.getDate() + '/' + currentYear); // MM/DD/YYYY fix
-            // Correcting Date Object creation for next birthday to ensure valid parsing
-            nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
-            
-            if (today > nextBirthday) {
-                nextBirthday.setFullYear(currentYear + 1);
-            }
-            const timeDiff = nextBirthday - today;
-            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-            document.getElementById('nextBday').innerText = `${daysLeft} Days`;
+            let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
+            if (today > nextBirthday) nextBirthday.setFullYear(currentYear + 1);
+            const daysLeft = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
 
-            // 3. Zodiac Sign
-            const zDay = dob.getDate();
-            const zMonth = dob.getMonth() + 1;
+            // Zodiac Calculation
+            const zDay = dob.getDate(); const zMonth = dob.getMonth() + 1;
             let zodiac = "";
-            
-            if ((zMonth == 1 && zDay >= 20) || (zMonth == 2 && zDay <= 18)) zodiac = "Aquarius (Kumbh)";
-            else if ((zMonth == 2 && zDay >= 19) || (zMonth == 3 && zDay <= 20)) zodiac = "Pisces (Meen)";
-            else if ((zMonth == 3 && zDay >= 21) || (zMonth == 4 && zDay <= 19)) zodiac = "Aries (Mesh)";
-            else if ((zMonth == 4 && zDay >= 20) || (zMonth == 5 && zDay <= 20)) zodiac = "Taurus (Vrish)";
-            else if ((zMonth == 5 && zDay >= 21) || (zMonth == 6 && zDay <= 20)) zodiac = "Gemini (Mithun)";
-            else if ((zMonth == 6 && zDay >= 21) || (zMonth == 7 && zDay <= 22)) zodiac = "Cancer (Kark)";
-            else if ((zMonth == 7 && zDay >= 23) || (zMonth == 8 && zDay <= 22)) zodiac = "Leo (Simha)";
-            else if ((zMonth == 8 && zDay >= 23) || (zMonth == 9 && zDay <= 22)) zodiac = "Virgo (Kanya)";
-            else if ((zMonth == 9 && zDay >= 23) || (zMonth == 10 && zDay <= 22)) zodiac = "Libra (Tula)";
-            else if ((zMonth == 10 && zDay >= 23) || (zMonth == 11 && zDay <= 21)) zodiac = "Scorpio (Vrishchik)";
-            else if ((zMonth == 11 && zDay >= 22) || (zMonth == 12 && zDay <= 21)) zodiac = "Sagittarius (Dhanu)";
-            else zodiac = "Capricorn (Makar)";
-            
-            document.getElementById('zodiacSign').innerText = zodiac;
+            if ((zMonth == 1 && zDay >= 20) || (zMonth == 2 && zDay <= 18)) zodiac = "Aquarius";
+            else if ((zMonth == 2 && zDay >= 19) || (zMonth == 3 && zDay <= 20)) zodiac = "Pisces";
+            else if ((zMonth == 3 && zDay >= 21) || (zMonth == 4 && zDay <= 19)) zodiac = "Aries";
+            else if ((zMonth == 4 && zDay >= 20) || (zMonth == 5 && zDay <= 20)) zodiac = "Taurus";
+            else if ((zMonth == 5 && zDay >= 21) || (zMonth == 6 && zDay <= 20)) zodiac = "Gemini";
+            else if ((zMonth == 6 && zDay >= 21) || (zMonth == 7 && zDay <= 22)) zodiac = "Cancer";
+            else if ((zMonth == 7 && zDay >= 23) || (zMonth == 8 && zDay <= 22)) zodiac = "Leo";
+            else if ((zMonth == 8 && zDay >= 23) || (zMonth == 9 && zDay <= 22)) zodiac = "Virgo";
+            else if ((zMonth == 9 && zDay >= 23) || (zMonth == 10 && zDay <= 22)) zodiac = "Libra";
+            else if ((zMonth == 10 && zDay >= 23) || (zMonth == 11 && zDay <= 21)) zodiac = "Scorpio";
+            else if ((zMonth == 11 && zDay >= 22) || (zMonth == 12 && zDay <= 21)) zodiac = "Sagittarius";
+            else zodiac = "Capricorn";
 
-            // 4. Total Hours & Sleep
-            const diffTime = Math.abs(today - dob);
-            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
-            document.getElementById('totalHours').innerText = totalHours.toLocaleString();
-            
-            // Assume 8 hours sleep per day (1/3 of life)
-            const sleepYears = (years / 3).toFixed(1);
-            document.getElementById('sleepTime').innerText = `${sleepYears} Years`;
+            // --- Update Card UI ---
+            document.getElementById('cardAge').innerText = `${years} YEARS`;
+            document.getElementById('cardDetails').innerText = `${months} Months, ${days} Days Earth Time`;
+            document.getElementById('cardNextBday').innerText = `${daysLeft} Days`;
+            document.getElementById('cardZodiac').innerText = zodiac;
 
-            // 5. Day of Birth
-            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            document.getElementById('birthDayName').innerText = daysOfWeek[dob.getDay()];
+            // --- 2. PICK RANDOM BIO ---
+            const randomBio = bioList[Math.floor(Math.random() * bioList.length)];
+            document.getElementById('cardBio').innerText = `"${randomBio}"`;
 
-            // Summary Text
-            document.getElementById('summaryLine').innerText = `Oho! Tum ${daysOfWeek[dob.getDay()]} ko paida hue the aur ab tak ${totalHours.toLocaleString()} ghante jee chuke ho.`;
-
-            // Show Result
+            // Show the section
             document.getElementById('resultSection').style.display = "block";
+            // Scroll to card
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- 3. DOWNLOAD FUNCTION (Using html2canvas) ---
+        function downloadImage() {
+            const cardElement = document.getElementById('downloadableCard');
+            const btn = document.querySelector('.btn-download');
+            btn.innerText = "Generating...";
+            
+            // Use html2canvas library to take a "screenshot" of the div
+            html2canvas(cardElement, {
+                scale: 2, // Higher quality download
+                backgroundColor: null // Transparent background fix
+            }).then(canvas => {
+                // Convert canvas to image URL
+                const imageURL = canvas.toDataURL("image/png");
+                // Create temporary link to trigger download
+                const link = document.createElement('a');
+                link.href = imageURL;
+                link.download = 'My-Life-Card-XizoaHub.png';
+                link.click();
+                btn.innerText = "⬇️ Download Card";
+            });
+        }
+
+        // --- SHARE FUNCTION (Web Share API) ---
+        function shareText() {
+            const age = document.getElementById('cardAge').innerText;
+            const bio = document.getElementById('cardBio').innerText;
+            
+            const shareData = {
+                title: 'My Life Stats Card',
+                text: `Check out my life stats on XizoaHub! I am ${age} old. My vibe: ${bio}`,
+                url: window.location.href // Shares current page URL
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Shared successfully'))
+                    .catch((error) => console.log('Error sharing', error));
+            } else {
+                // Fallback for desktop or unsupported browsers
+                alert("Link copied! You can paste it anywhere.");
+                navigator.clipboard.writeText(`${shareData.text} \n ${shareData.url}`);
+            }
         }
     </script>
 </body>
