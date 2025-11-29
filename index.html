@@ -3,158 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator & Insta Card - XizoaHub</title>
-    <meta name="description" content="Create your Viral Age Card with your Photo. Best Age Calculator by XizoaHub.">
+    <title>Viral Insta Age Card - XizoaHub</title>
+    <meta name="description" content="Create your premium Instagram-style age card with photos and icons.">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #000000;
             --text-main: #ffffff;
-            --card-dark: #0c0c0e;
+            --card-bg: #121212;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            /* Instagram colorful gradient ring */
             --insta-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --font-family: 'Inter', sans-serif;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
         body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 50px; }
 
         /* Navbar */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #222; }
-        .logo { font-weight: 800; font-size: 1.2rem; color: white; text-decoration: none; }
+        nav { display: flex; justify-content: center; padding: 1rem; border-bottom: 1px solid #222; }
+        .logo { font-weight: 900; font-size: 1.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
 
         /* INPUT SECTION */
-        .input-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+        .input-card { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 1.5rem; margin-bottom: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .form-group { margin-bottom: 1rem; }
-        .label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .label { display: block; margin-bottom: 0.5rem; color: #bbb; font-size: 0.9rem; font-weight: 600; }
         input { 
-            background: #000; border: 1px solid #333; padding: 12px; 
-            border-radius: 6px; color: white; width: 100%; font-size: 1rem;
+            background: #0a0a0a; border: 1px solid #444; padding: 12px; 
+            border-radius: 8px; color: white; width: 100%; font-size: 1rem; outline: none; transition: border 0.3s;
         }
+        input:focus { border-color: #bf953f; }
 
-        /* File Upload Styling */
-        .file-upload-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
+        /* Fancy File Upload Button */
+        .file-upload-wrapper { position: relative; overflow: hidden; display: block; }
         .btn-upload {
-            border: 2px dashed #444;
-            background: #080808;
-            color: #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-            transition: 0.2s;
+            border: 2px dashed #555; background: rgba(255,255,255,0.05); color: #ccc;
+            padding: 20px; border-radius: 12px; font-size: 1rem; cursor: pointer;
+            width: 100%; text-align: center; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .btn-upload:hover { border-color: #bf953f; color: white; }
-        input[type="file"] {
-            font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer;
-        }
+        .btn-upload:hover { border-color: #bf953f; color: #bf953f; background: rgba(191, 149, 63, 0.1); }
+        input[type="file"] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
 
         .btn-calculate { 
-            background: var(--gold-gradient); color: #2c1a00; border: none; 
-            padding: 14px; border-radius: 6px; font-weight: 700; width: 100%;
-            cursor: pointer; margin-top: 10px; font-size: 1rem; 
+            background: var(--insta-gradient); color: white; border: none; 
+            padding: 15px; border-radius: 12px; font-weight: 800; width: 100%;
+            cursor: pointer; margin-top: 10px; font-size: 1.1rem; letter-spacing: 0.5px;
+            transition: transform 0.2s;
         }
+        .btn-calculate:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4); }
 
-        /* --- INSTAGRAM STYLE CARD --- */
-        #resultSection { display: none; margin-top: 2rem; }
+        /* --- PREMIUM VIRAL CARD DESIGN --- */
+        #resultSection { display: none; margin-top: 2rem; animation: fadeInUp 0.6s ease; }
+
+        .card-frame {
+            /* The outer glow and border of the card */
+            padding: 3px;
+            background: var(--insta-gradient);
+            border-radius: 24px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 25px 50px -12px rgba(220, 39, 67, 0.3);
+        }
 
         .card-wrapper {
-            background: #000;
-            border-radius: 20px;
+            /* The actual card background */
+            background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+            border-radius: 21px; /* Slightly less than frame */
             overflow: hidden;
-            max-width: 380px;
-            margin: 0 auto;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            border: 1px solid #333;
         }
 
-        /* Background Design inside Card */
-        .card-bg {
-            height: 120px;
+        /* Top decorative banner */
+        .card-banner {
+            height: 80px;
             background: var(--insta-gradient);
-            opacity: 0.8;
+            opacity: 0.15;
+            mask-image: linear-gradient(to bottom, black, transparent);
         }
 
         .card-content {
-            padding: 0 1.5rem 2rem 1.5rem;
+            padding: 0 2rem 2.5rem 2rem;
             text-align: center;
-            margin-top: -60px; /* Pull content up */
+            margin-top: -50px; /* Pull content up into banner */
+            position: relative; z-index: 2;
         }
 
-        /* Profile Image Container */
+        /* Profile Image Circle with Ring */
         .profile-container {
-            width: 110px; height: 110px;
-            margin: 0 auto 10px auto;
+            width: 130px; height: 130px;
+            margin: 0 auto 15px auto;
             border-radius: 50%;
-            padding: 3px;
-            background: #000; /* Gap between ring and photo */
-            position: relative;
-        }
-        
-        .profile-ring {
-            position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
-            border-radius: 50%;
-            background: var(--insta-gradient);
-            z-index: 0;
+            padding: 4px; /* Thickness of ring */
+            background: var(--insta-gradient); /* The ring color */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .profile-img {
             width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #000;
-            position: relative; z-index: 1;
+            border: 4px solid #000; /* Gap between ring and photo */
             background-color: #222;
         }
 
-        .user-name { font-size: 1.4rem; font-weight: 700; color: white; }
-        .user-handle { color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-        /* Stats in Card */
-        .stats-row {
-            display: flex; justify-content: space-around;
-            background: #111; border-radius: 12px; padding: 15px;
-            margin-bottom: 1.5rem; border: 1px solid #222;
+        .user-name { font-size: 1.8rem; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1.2; }
+        .user-handle { 
+            color: #f09433; font-weight: 600; font-size: 1rem; margin-bottom: 1.5rem; 
+            background: var(--insta-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .stat-box h3 { font-size: 1.5rem; color: white; font-weight: 800; }
-        .stat-box span { font-size: 0.75rem; color: #888; text-transform: uppercase; }
 
+        /* NEW: Badges Row with Icons */
+        .badges-row {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 2rem;
+        }
+        .badge-item {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; color: #ddd; font-weight: 600;
+        }
+        .badge-icon { font-size: 1.2rem; }
+
+        /* Main Age Stats */
+        .stats-box {
+            background: rgba(255,255,255,0.03); border-radius: 16px;
+            padding: 20px; border: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-around; margin-bottom: 1.5rem;
+        }
+        .stat div { font-size: 2rem; font-weight: 900; color: white; line-height: 1; }
+        .stat span { font-size: 0.8rem; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+
+        /* Bio */
         .bio-text {
-            font-size: 0.9rem; color: #ddd; font-style: italic;
-            line-height: 1.4; padding: 0 10px;
+            font-size: 1rem; color: #ccc; font-style: italic;
+            line-height: 1.5; padding: 15px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.02), transparent);
+            border-radius: 12px; border-left: 3px solid #e6683c;
         }
 
+        /* Watermark Tag - will hide on download */
         .footer-tag {
-            margin-top: 20px; font-size: 0.7rem; color: #444; letter-spacing: 2px; text-transform: uppercase;
+            margin-top: 25px; font-size: 0.75rem; color: #555; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
         }
 
         /* Buttons */
-        .btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem; max-width: 380px; margin-left: auto; margin-right: auto; }
-        .action-btn { flex: 1; padding: 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; }
-        .dl-btn { background: white; color: black; }
-        .share-btn { background: #222; color: white; border: 1px solid #333; }
+        .btn-row { display: flex; gap: 15px; justify-content: center; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .action-btn { 
+            flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 700; font-size: 1rem; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
+        }
+        .dl-btn { background: white; color: black; box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+        .dl-btn:hover { background: #eee; transform: translateY(-2px); }
+        .reset-btn { background: #222; color: white; border: 1px solid #333; }
+        .reset-btn:hover { background: #333; }
 
-        /* Extra Info Section */
-        .details-section { margin-top: 4rem; text-align: center; border-top: 1px solid #222; padding-top: 2rem; }
-        .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem; }
-        .d-item { background: #111; padding: 1rem; border-radius: 8px; }
-        .d-item b { display: block; color: white; font-size: 1.1rem; }
-        .d-item span { color: #666; font-size: 0.8rem; }
-        
-        footer { margin-top: 3rem; text-align: center; color: #555; font-size: 0.8rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -166,24 +173,26 @@
     <div class="container">
         
         <div class="input-card">
-            <h2 style="margin-bottom: 1.5rem; text-align: center;">Generate Viral Card</h2>
+            <h2 style="margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">Create Viral Card 🔥</h2>
             
             <div class="form-group">
-                <label class="label">Choose Profile Photo</label>
                 <div class="file-upload-wrapper">
-                    <button class="btn-upload">📸 Tap to Upload Photo</button>
+                    <button class="btn-upload">
+                        <span style="font-size: 1.5rem;">📸</span> 
+                        <span id="uploadText">Tap to Upload Profile Pic</span>
+                    </button>
                     <input type="file" id="photoInput" accept="image/*" onchange="previewFile()">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="label">Name</label>
-                <input type="text" id="nameInput" placeholder="Your Name">
+                <input type="text" id="nameInput" placeholder="Eg. Rahul Sharma">
             </div>
             
             <div class="form-group">
-                <label class="label">Instagram Username</label>
-                <input type="text" id="instaInput" placeholder="@username">
+                <label class="label">Instagram ID</label>
+                <input type="text" id="instaInput" placeholder="Eg. @rahul_07">
             </div>
 
             <div class="form-group">
@@ -191,132 +200,114 @@
                 <input type="date" id="dobInput">
             </div>
 
-            <button class="btn-calculate" onclick="generateCard()">Create My Card ✨</button>
+            <button class="btn-calculate" onclick="generateCard()">Generate Card ✨</button>
         </div>
 
         <div id="resultSection">
             
-            <div class="card-wrapper" id="downloadArea">
-                <div class="card-bg"></div>
-                
-                <div class="card-content">
-                    <div class="profile-container">
-                        <div class="profile-ring"></div>
-                        <img src="https://via.placeholder.com/150" id="cardImg" class="profile-img">
-                    </div>
-
-                    <div class="user-name" id="outName">Name</div>
-                    <div class="user-handle" id="outInsta">@username</div>
-
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <h3 id="outYears">0</h3>
-                            <span>Years</span>
+            <div class="card-frame" id="downloadArea">
+                <div class="card-wrapper">
+                    <div class="card-banner"></div>
+                    
+                    <div class="card-content">
+                        <div class="profile-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" id="cardImg" class="profile-img">
                         </div>
-                        <div class="stat-box">
-                            <h3 id="outMonths">0</h3>
-                            <span>Months</span>
-                        </div>
-                        <div class="stat-box">
-                            <h3 id="outDays">0</h3>
-                            <span>Days</span>
-                        </div>
-                    </div>
 
-                    <div class="bio-text" id="outBio">
-                        "Loading viral bio..."
-                    </div>
+                        <div class="user-name" id="outName">Name</div>
+                        <div class="user-handle" id="outInsta">@username</div>
 
-                    <div class="footer-tag">xizoahub.github.io</div>
+                        <div class="badges-row">
+                            <div class="badge-item">
+                                <span class="badge-icon">✨</span>
+                                <span id="outZodiac">Zodiac</span>
+                            </div>
+                            <div class="badge-item">
+                                <span class="badge-icon">🎂</span>
+                                <span id="outNextBday">0 Days Left</span>
+                            </div>
+                        </div>
+
+                        <div class="stats-box">
+                            <div class="stat">
+                                <div id="outYears">0</div>
+                                <span>Years</span>
+                            </div>
+                            <div class="stat">
+                                <div id="outMonths">0</div>
+                                <span>Months</span>
+                            </div>
+                            <div class="stat">
+                                <div id="outDays">0</div>
+                                <span>Days</span>
+                            </div>
+                        </div>
+
+                        <div class="bio-text" id="outBio">
+                            "Loading viral vibe..."
+                        </div>
+
+                        <div class="footer-tag" id="watermarkTag">xizoahub.github.io</div>
+                    </div>
                 </div>
             </div>
             <div class="btn-row">
-                <button class="action-btn dl-btn" onclick="downloadCard()">⬇️ Save Image</button>
-                <button class="action-btn share-btn" onclick="window.location.reload()">🔄 New</button>
+                <button class="action-btn dl-btn" onclick="downloadCard()">
+                    ⬇️ Save to Gallery
+                </button>
+                <button class="action-btn reset-btn" onclick="window.location.reload()">
+                    🔄 Create New
+                </button>
             </div>
-
-            <div class="details-section">
-                <h3>Life Summary</h3>
-                <div class="detail-grid">
-                    <div class="d-item">
-                        <b id="dHours">0</b>
-                        <span>Hours Lived</span>
-                    </div>
-                    <div class="d-item">
-                        <b id="dDay">Sunday</b>
-                        <span>Born Day</span>
-                    </div>
-                    <div class="d-item">
-                        <b id="dZodiac">-</b>
-                        <span>Zodiac</span>
-                    </div>
-                    <div class="d-item">
-                        <b id="dNext">0 Days</b>
-                        <span>Next B'day</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <footer>
-            &copy; 2025 XizoaHub Tools. <br>
-            <a href="#" style="color:#555; text-decoration:none;">Privacy</a> | <a href="#" style="color:#555; text-decoration:none;">Contact</a>
-        </footer>
 
     </div>
 
     <script>
+        // Hinglish Viral Bios
         const bios = [
             "Just getting cooler with age. 😎",
-            "Limited Edition. There is only one me.",
-            "Leveling up my life stats. 🚀",
-            "Not old, just classic. ✨",
-            "Surviving earth since day 1.",
-            "Collecting moments, not things.",
+            "Limited Edition version of me. ✨",
+            "Dharti par bhoj nahi, vibe hoon. 🚀",
+            "Not old, just upgraded. 💯",
+            "Surviving & thriving since day 1.",
+            "Collecting moments, ignore my age. 🤫",
             "Main apni favourite hoon. 💃",
-            "Loading next chapter... ⏳"
+            "Leveling up... currently loading next chapter. ⏳"
         ];
 
-        // Handle Photo Upload Preview
         function previewFile() {
-            const preview = document.querySelector('.btn-upload');
+            const previewText = document.getElementById('uploadText');
+            const btn = document.querySelector('.btn-upload');
             const file = document.querySelector('input[type=file]').files[0];
             if (file) {
-                preview.innerText = "✅ Photo Selected: " + file.name;
-                preview.style.borderColor = "#4CAF50";
-                preview.style.color = "#4CAF50";
+                previewText.innerText = "✅ Photo Selected: " + file.name;
+                btn.style.borderColor = "#e6683c";
+                btn.style.background = "rgba(230, 104, 60, 0.1)";
             }
         }
 
         function generateCard() {
-            const name = document.getElementById('nameInput').value || "User";
-            let insta = document.getElementById('instaInput').value || "@user";
+            const name = document.getElementById('nameInput').value || "Legend";
+            let insta = document.getElementById('instaInput').value || "@insta_user";
             if(!insta.startsWith('@')) insta = '@' + insta;
             const dobInput = document.getElementById('dobInput').value;
 
-            if(!dobInput) { alert("Date of birth daalo bhai!"); return; }
+            if(!dobInput) { alert("Birthday to batao bhai! (Select Date)"); return; }
 
             // Photo Logic
             const file = document.querySelector('input[type=file]').files[0];
             const img = document.getElementById('cardImg');
-            
             if (file) {
                 const reader = new FileReader();
-                reader.onloadend = function () {
-                    img.src = reader.result;
-                }
+                reader.onloadend = function () { img.src = reader.result; }
                 reader.readAsDataURL(file);
-            } else {
-                // Default avatar if no photo uploaded
-                img.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
             }
 
-            // Calculation
+            // Calculations
             const dob = new Date(dobInput);
             const today = new Date();
-            
-            if (dob > today) { alert("Future date mat daalo!"); return; }
+            if (dob > today) { alert("Future se ho kya? Sahi date daalo."); return; }
 
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
@@ -324,65 +315,72 @@
             if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
             if (months < 0) { years--; months += 12; }
 
-            const diffTime = Math.abs(today - dob);
-            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
-            const dayName = dob.toLocaleDateString('en-US', { weekday: 'long' });
-
-            // Next Birthday
+            // Next Bday & Zodiac
             const currentYear = today.getFullYear();
             let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
             if (today > nextBirthday) nextBirthday.setFullYear(currentYear + 1);
             const nextDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
-
-            // Zodiac
+            
             const zDay = dob.getDate(); const zMonth = dob.getMonth() + 1;
             let zodiac = getZodiac(zDay, zMonth);
 
-            // Update UI
+            // Update Card UI
             document.getElementById('outName').innerText = name;
             document.getElementById('outInsta').innerText = insta;
             document.getElementById('outYears').innerText = years;
             document.getElementById('outMonths').innerText = months;
             document.getElementById('outDays').innerText = days;
+            document.getElementById('outZodiac').innerText = zodiac;
+            document.getElementById('outNextBday').innerText = nextDays + " Days Left";
             document.getElementById('outBio').innerText = bios[Math.floor(Math.random() * bios.length)];
 
-            document.getElementById('dHours').innerText = totalHours.toLocaleString();
-            document.getElementById('dDay').innerText = dayName;
-            document.getElementById('dZodiac').innerText = zodiac;
-            document.getElementById('dNext').innerText = nextDays + " Days";
-
-            document.getElementById('resultSection').style.display = "block";
+            // Show Section
+            const resultSection = document.getElementById('resultSection');
+            resultSection.style.display = "block";
             setTimeout(() => {
-                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
         }
 
         function getZodiac(d, m) {
-            if((m==1 && d>=20)||(m==2 && d<=18)) return "Aquarius";
-            if((m==2 && d>=19)||(m==3 && d<=20)) return "Pisces";
-            if((m==3 && d>=21)||(m==4 && d<=19)) return "Aries";
-            if((m==4 && d>=20)||(m==5 && d<=20)) return "Taurus";
-            if((m==5 && d>=21)||(m==6 && d<=20)) return "Gemini";
-            if((m==6 && d>=21)||(m==7 && d<=22)) return "Cancer";
-            if((m==7 && d>=23)||(m==8 && d<=22)) return "Leo";
-            if((m==8 && d>=23)||(m==9 && d<=22)) return "Virgo";
-            if((m==9 && d>=23)||(m==10 && d<=22)) return "Libra";
-            if((m==10 && d>=23)||(m==11 && d<=21)) return "Scorpio";
-            if((m==11 && d>=22)||(m==12 && d<=21)) return "Sagittarius";
-            return "Capricorn";
+            if((m==1 && d>=20)||(m==2 && d<=18)) return "Aquarius ♒";
+            if((m==2 && d>=19)||(m==3 && d<=20)) return "Pisces ♓";
+            if((m==3 && d>=21)||(m==4 && d<=19)) return "Aries ♈";
+            if((m==4 && d>=20)||(m==5 && d<=20)) return "Taurus ♉";
+            if((m==5 && d>=21)||(m==6 && d<=20)) return "Gemini ♊";
+            if((m==6 && d>=21)||(m==7 && d<=22)) return "Cancer ♋";
+            if((m==7 && d>=23)||(m==8 && d<=22)) return "Leo ♌";
+            if((m==8 && d>=23)||(m==9 && d<=22)) return "Virgo ♍";
+            if((m==9 && d>=23)||(m==10 && d<=22)) return "Libra ♎";
+            if((m==10 && d>=23)||(m==11 && d<=21)) return "Scorpio ♏";
+            if((m==11 && d>=22)||(m==12 && d<=21)) return "Sagittarius ♐";
+            return "Capricorn ♑";
         }
 
+        // --- DOWNLOAD LOGIC (With Watermark Hider) ---
         function downloadCard() {
             const card = document.getElementById('downloadArea');
             const btn = document.querySelector('.dl-btn');
-            btn.innerText = "Processing...";
+            const watermark = document.getElementById('watermarkTag');
+            const originalBtnText = btn.innerHTML;
+
+            btn.innerHTML = "Generating HD Image...";
+            // 1. HIDE Watermark before capture
+            watermark.style.display = 'none'; 
             
-            html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+            html2canvas(card, { 
+                scale: 3, // Ultra HD quality
+                useCORS: true, 
+                backgroundColor: null 
+            }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Insta-Age-Card.png';
-                link.href = canvas.toDataURL();
+                link.download = 'My-Viral-Card.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
-                btn.innerText = "⬇️ Save Image";
+                
+                // 2. SHOW Watermark back after capture
+                watermark.style.display = 'block';
+                btn.innerHTML = originalBtnText;
             });
         }
     </script>
