@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viral Insta Age & Astro Card - XizoaHub</title>
-    <meta name="description" content="Age Calculator with Viral Card and Detailed Astrology Predictions.">
+    <title>Age Calculator 2025 Making Viral Insta Card</title>
+
+<meta name="description" content="Sirf Age nahi, apna Viral Instagram Card banao! Check exact age, days left for birthday, zodiac sign (Rashi), and personality traits. Download HD Card for Free.">
+
+<meta name="keywords" content="age calculator, zodiac sign calculator, rashi finder, instagram age card, viral birthday card, life stats, age calculator online, priyanshu age tool">
+
+<meta property="og:title" content="Viral Age & Zodiac Card Creator 🚀">
+<meta property="og:description" content="Maine apni Age aur Rashi ka Viral Card banaya. Tum bhi try karo! Free & No Login.">
+<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/847/847969.png"> ```
+
+### **💡 Pro Tip: Google Search Console**
+Code update karne ke baad, agar tum chahte ho ki Google tumhari site ko **jaldi pakad le**, to:
+1.  **Google Search Console** par jao.
+2.  Apni website (`xizoahub.github.io/...`) submit karo.
+3.  Warna Google ko khud dhoondne me 1-2 hafte lag sakte hain.
+
+Abhi ke liye upar wala code **Option 1** best hai, use laga do!
+    
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -12,111 +28,135 @@
         :root {
             --bg-color: #000000;
             --text-main: #ffffff;
-            --card-bg: #121212;
-            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --insta-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            /* Astrology Theme Colors */
-            --astro-bg: linear-gradient(to right, #240b36, #c31432);
             --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            --default-gradient: linear-gradient(45deg, #f09433, #bc1888);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
         body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 50px; }
 
-        /* Navbar */
         nav { display: flex; justify-content: center; padding: 1rem; border-bottom: 1px solid #222; }
-        .logo { font-weight: 900; font-size: 1.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; }
+        .logo { font-weight: 900; font-size: 1.5rem; color: white; letter-spacing: 1px; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
 
-        /* INPUT SECTION */
+        /* INPUT AREA */
         .input-card { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 1.5rem; margin-bottom: 3rem; }
         
         .form-group { margin-bottom: 1.2rem; }
         .label { display: block; margin-bottom: 0.5rem; color: #bbb; font-size: 0.9rem; font-weight: 600; }
         input { background: #0a0a0a; border: 1px solid #444; padding: 12px; border-radius: 8px; color: white; width: 100%; outline: none; }
-        input:focus { border-color: #bf953f; }
-
+        
         .file-upload-wrapper { position: relative; overflow: hidden; display: block; }
         .btn-upload { border: 2px dashed #555; background: rgba(255,255,255,0.05); color: #ccc; padding: 20px; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
         input[type="file"] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
 
-        .btn-calculate { background: var(--insta-gradient); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 10px; font-size: 1.1rem; }
+        .btn-calculate { background: white; color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 10px; font-size: 1.1rem; }
 
-        /* --- 1. VIRAL CARD SECTION --- */
-        #resultSection { display: none; margin-top: 2rem; animation: fadeInUp 0.6s ease; }
+        /* --- THE CARD DESIGN --- */
+        #resultSection { display: none; margin-top: 2rem; }
 
-        .card-frame { padding: 3px; background: var(--insta-gradient); border-radius: 24px; max-width: 400px; margin: 0 auto; box-shadow: 0 25px 50px -12px rgba(220, 39, 67, 0.3); }
-        .card-wrapper { background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%); border-radius: 21px; overflow: hidden; position: relative; }
-        .card-banner { height: 80px; background: var(--insta-gradient); opacity: 0.15; }
-        .card-content { padding: 0 2rem 2.5rem 2rem; text-align: center; margin-top: -50px; position: relative; z-index: 2; }
-        
-        .profile-container { width: 130px; height: 130px; margin: 0 auto 15px auto; border-radius: 50%; padding: 4px; background: var(--insta-gradient); }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #000; background-color: #222; }
-
-        .user-name { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.2; }
-        .user-handle { color: #f09433; font-weight: 600; font-size: 1rem; margin-bottom: 1.5rem; background: var(--insta-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .badges-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 2rem; }
-        .badge-item { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; color: #ddd; font-weight: 600; }
-
-        .stats-box { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; margin-bottom: 1.5rem; }
-        .stat div { font-size: 2rem; font-weight: 900; color: white; line-height: 1; }
-        .stat span { font-size: 0.8rem; color: #888; text-transform: uppercase; font-weight: 700; }
-
-        .bio-text { font-size: 1rem; color: #ccc; font-style: italic; padding: 15px; background: linear-gradient(45deg, rgba(255,255,255,0.02), transparent); border-radius: 12px; border-left: 3px solid #e6683c; }
-        .footer-tag { margin-top: 25px; font-size: 0.75rem; color: #555; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-
-        .btn-row { display: flex; gap: 15px; justify-content: center; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
-        .action-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; }
-        .dl-btn { background: white; color: black; }
-        .reset-btn { background: #222; color: white; border: 1px solid #333; }
-
-        /* --- 2. ASTROLOGY SECTION (NEW) --- */
-        .astro-container {
-            margin-top: 4rem;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 20px;
-            overflow: hidden;
+        /* Outer Glow Frame */
+        .card-frame {
+            padding: 3px;
+            /* Default fallback, JS will change this */
+            background: linear-gradient(45deg, #333, #555); 
+            border-radius: 24px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
-        
-        .astro-header {
-            background: var(--astro-bg);
-            padding: 2rem;
+
+        .card-wrapper {
+            background: #050505; /* Solid dark background to fix corners */
+            border-radius: 21px; 
+            overflow: hidden; 
+            position: relative;
             text-align: center;
         }
-        .astro-header h2 { color: white; font-size: 1.8rem; margin-bottom: 5px; }
-        .astro-subtitle { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
 
-        .astro-content {
-            padding: 2rem;
-            display: grid;
-            gap: 20px;
+        /* Top Dynamic Banner */
+        .card-banner {
+            height: 140px;
+            width: 100%;
+            background: var(--default-gradient); /* Changes dynamically */
+            opacity: 0.8;
+            mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
         }
 
-        .astro-box {
-            background: #1a1a1a;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #c31432;
+        .card-content {
+            padding: 0 2rem 2.5rem 2rem;
+            margin-top: -80px; /* Overlap banner */
+            position: relative; 
+            z-index: 2;
         }
-        .astro-box h3 { color: #f09433; font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        .astro-box p { color: #ddd; font-size: 1rem; line-height: 1.5; }
 
-        .fav-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
+        /* Profile Pic */
+        .profile-container {
+            width: 140px; height: 140px;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            padding: 4px;
+            background: #111; /* Fallback ring color */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .fav-item {
-            background: #000; padding: 10px; border-radius: 8px; text-align: center;
-        }
-        .fav-label { font-size: 0.7rem; color: #777; display: block; }
-        .fav-val { font-size: 0.9rem; color: white; font-weight: bold; }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #050505; /* Matches card bg */
+            background-color: #222;
+        }
+
+        /* Text Styles */
+        .user-name { font-size: 1.8rem; font-weight: 800; color: white; margin-top: 10px; }
+        
+        /* Fixed Handle: No Gradient Background to prevent bugs */
+        .user-handle { 
+            font-size: 1rem; 
+            margin-bottom: 1.5rem; 
+            font-weight: 600;
+            color: #ccc; /* Will be changed by JS */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* Badges */
+        .badges-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; }
+        .badge-item { 
+            display: flex; align-items: center; gap: 6px; 
+            background: rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.15); 
+            padding: 8px 14px; border-radius: 50px; 
+            font-size: 0.85rem; color: #eee; font-weight: 600; 
+        }
+
+        /* Stats Box */
+        .stats-box {
+            background: #111; 
+            border-radius: 16px;
+            padding: 20px; 
+            border: 1px solid #222;
+            display: flex; justify-content: space-around; 
+            margin-bottom: 1.5rem;
+        }
+        .stat div { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.1; }
+        .stat span { font-size: 0.7rem; color: #777; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+
+        /* Watermark */
+        .footer-tag { 
+            margin-top: 20px; font-size: 0.7rem; color: #444; 
+            font-weight: 700; letter-spacing: 2px; text-transform: uppercase; 
+        }
+
+        /* Buttons */
+        .btn-row { display: flex; gap: 15px; justify-content: center; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .action-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; }
+        .dl-btn { background: #3b82f6; color: white; }
+        .reset-btn { background: #222; color: white; border: 1px solid #333; }
+
     </style>
 </head>
 <body>
@@ -128,13 +168,12 @@
     <div class="container">
         
         <div class="input-card">
-            <h2 style="margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">Create Viral Card 🔥</h2>
+            <h2 style="margin-bottom: 2rem; text-align: center; color:white;">Create Premium Card 🎨</h2>
             
             <div class="form-group">
                 <div class="file-upload-wrapper">
                     <button class="btn-upload">
-                        <span style="font-size: 1.5rem;">📸</span> 
-                        <span id="uploadText">Tap to Upload Profile Pic</span>
+                        <span id="uploadText">📸 Upload Photo</span>
                     </button>
                     <input type="file" id="photoInput" accept="image/*" onchange="previewFile()">
                 </div>
@@ -142,183 +181,139 @@
 
             <div class="form-group">
                 <label class="label">Name</label>
-                <input type="text" id="nameInput" placeholder="Eg. Rahul">
+                <input type="text" id="nameInput" placeholder="Name">
             </div>
             
             <div class="form-group">
-                <label class="label">Instagram ID</label>
-                <input type="text" id="instaInput" placeholder="Eg. @rahul_07">
+                <label class="label">Instagram</label>
+                <input type="text" id="instaInput" placeholder="@username">
             </div>
 
             <div class="form-group">
-                <label class="label">Date of Birth</label>
+                <label class="label">Birthday</label>
                 <input type="date" id="dobInput">
             </div>
 
-            <button class="btn-calculate" onclick="generateReport()">Generate Astrology & Card ✨</button>
+            <button class="btn-calculate" onclick="generateCard()">Generate Theme Card ✨</button>
         </div>
 
         <div id="resultSection">
             
             <div class="card-frame" id="downloadArea">
                 <div class="card-wrapper">
-                    <div class="card-banner"></div>
+                    
+                    <div class="card-banner" id="themeBanner"></div>
+                    
                     <div class="card-content">
-                        <div class="profile-container">
-                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" id="cardImg" class="profile-img">
+                        <div class="profile-container" id="profileRing">
+                            <img src="https://via.placeholder.com/150" id="cardImg" class="profile-img">
                         </div>
+
                         <div class="user-name" id="outName">Name</div>
+                        
                         <div class="user-handle" id="outInsta">@username</div>
+
                         <div class="badges-row">
-                            <div class="badge-item"><span class="badge-icon">✨</span><span id="outZodiac">Zodiac</span></div>
-                            <div class="badge-item"><span class="badge-icon">🎂</span><span id="outNextBday">0 Days</span></div>
+                            <div class="badge-item">
+                                <span id="zodiacIcon">✨</span>
+                                <span id="outZodiac">Zodiac</span>
+                            </div>
+                            <div class="badge-item">
+                                <span>🎂</span>
+                                <span id="outNextBday">0 Days</span>
+                            </div>
                         </div>
+
                         <div class="stats-box">
                             <div class="stat"><div id="outYears">0</div><span>Years</span></div>
                             <div class="stat"><div id="outMonths">0</div><span>Months</span></div>
                             <div class="stat"><div id="outDays">0</div><span>Days</span></div>
                         </div>
-                        <div class="bio-text" id="outBio">"Loading..."</div>
+
                         <div class="footer-tag" id="watermarkTag">xizoahub.github.io</div>
                     </div>
                 </div>
             </div>
             
             <div class="btn-row">
-                <button class="action-btn dl-btn" onclick="downloadCard()">⬇️ Save Card</button>
+                <button class="action-btn dl-btn" onclick="downloadCard()">⬇️ Download HD</button>
                 <button class="action-btn reset-btn" onclick="window.location.reload()">🔄 New</button>
-            </div>
-
-            <div class="astro-container">
-                <div class="astro-header">
-                    <h2>🔮 Astrology Report</h2>
-                    <div class="astro-subtitle">Based on your Zodiac Sign: <span id="astroSignName" style="color:#fcf6ba; font-weight:bold;">-</span></div>
-                </div>
-                
-                <div class="astro-content">
-                    
-                    <div class="astro-box">
-                        <h3>⚡ Who Are You? (Personality)</h3>
-                        <p id="astroPersonality">Loading...</p>
-                    </div>
-
-                    <div class="astro-box" style="border-color: #3b82f6;">
-                        <h3>💼 Career & Future</h3>
-                        <p id="astroCareer">Loading...</p>
-                    </div>
-
-                    <div class="astro-box" style="border-color: #10b981;">
-                        <h3>❤️ Your Favorites</h3>
-                        <div class="fav-grid">
-                            <div class="fav-item">
-                                <span class="fav-label">Lucky Color</span>
-                                <span class="fav-val" id="astroColor" style="color: yellow;">-</span>
-                            </div>
-                            <div class="fav-item">
-                                <span class="fav-label">Lucky Food</span>
-                                <span class="fav-val" id="astroFood">-</span>
-                            </div>
-                            <div class="fav-item">
-                                <span class="fav-label">Day</span>
-                                <span class="fav-val" id="astroDay">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // --- DATA: ZODIAC ENGINE (Hinglish) ---
-        const zodiacData = {
-            "Aries": {
-                trait: "Tum born leader ho. Thoda gussa aata hai but dil ke saaf ho. Log tumhe follow karna pasand karte hain.",
-                career: "Tumhe boss banna suit karta hai. Business, Army, ya Sports me aag laga doge.",
-                color: "Red", food: "Spicy Food", day: "Tuesday"
+        // --- ZODIAC THEME ENGINE ---
+        // Har rashi ke liye unique gradient aur color
+        const themes = {
+            "Aries": { 
+                grad: "linear-gradient(to bottom, #ff4b1f, #ff9068)", // Red/Orange
+                color: "#ff9068" 
             },
-            "Taurus": {
-                trait: "Tumhe luxury pasand hai. Thode ziddi ho par bohot loyal dost ho. Khaana tumhara pehla pyaar hai.",
-                career: "Banking, Art, ya Food Industry tumhare liye best hai. Jahan paisa ho, wahan tum ho.",
-                color: "Green", food: "Rich Desserts", day: "Friday"
+            "Taurus": { 
+                grad: "linear-gradient(to bottom, #11998e, #38ef7d)", // Green
+                color: "#38ef7d" 
             },
-            "Gemini": {
-                trait: "Tumhara mood har 5 minute me badalta hai. Tum bohot smart aur baato ke jadugar ho.",
-                career: "Media, Journalism, ya Marketing. Jahan bolna ho, wahan tum top karoge.",
-                color: "Yellow", food: "Snacks", day: "Wednesday"
+            "Gemini": { 
+                grad: "linear-gradient(to bottom, #fc4a1a, #f7b733)", // Yellow/Orange
+                color: "#f7b733" 
             },
-            "Cancer": {
-                trait: "Bohot emotional aur caring ho. Gussa kam karte ho par dil pe jaldi le lete ho.",
-                career: "Doctor, Teacher, ya HR. Logon ki madad karna tumhara talent hai.",
-                color: "Silver", food: "Comfort Food", day: "Monday"
+            "Cancer": { 
+                grad: "linear-gradient(to bottom, #2193b0, #6dd5ed)", // Blue
+                color: "#6dd5ed" 
             },
-            "Leo": {
-                trait: "Tum group ke King/Queen ho. Attention pasand hai aur confident rehte ho. Style tumhare khoon me hai.",
-                career: "Actor, Manager, ya Leader. Spotlight tumhare liye bani hai.",
-                color: "Gold", food: "Fancy Meals", day: "Sunday"
+            "Leo": { 
+                grad: "linear-gradient(to bottom, #f12711, #f5af19)", // Fire Gold
+                color: "#f5af19" 
             },
-            "Virgo": {
-                trait: "Perfectionist ho. Tumhe har cheez organized chahiye. Log advice lene tumhare paas aate hain.",
-                career: "Data Analyst, Writer, ya Detective. Detail me jaana tumhari power hai.",
-                color: "Grey", food: "Healthy Food", day: "Wednesday"
+            "Virgo": { 
+                grad: "linear-gradient(to bottom, #D3CCE3, #E9E4F0)", // Silver/Clean
+                color: "#D3CCE3" 
             },
-            "Libra": {
-                trait: "Tumhe ladai-jhagda pasand nahi. Charming ho aur sabko khush rakhna chahte ho.",
-                career: "Lawyer, Fashion Designer, ya Diplomat. Balance banana tumhara kaam hai.",
-                color: "Pink", food: "Sweets", day: "Friday"
+            "Libra": { 
+                grad: "linear-gradient(to bottom, #c471f5, #fa71cd)", // Pink/Purple
+                color: "#fa71cd" 
             },
-            "Scorpio": {
-                trait: "Mysterious aur intense. Tumhe samajhna mushkil hai. Jisse pyaar karte ho, uske liye jaan de sakte ho.",
-                career: "Researcher, Surgeon, ya Spy. Secret rakhna koi tumse seekhe.",
-                color: "Black/Maroon", food: "Spicy & Exotic", day: "Tuesday"
+            "Scorpio": { 
+                grad: "linear-gradient(to bottom, #800000, #2c0000)", // Dark Red/Black
+                color: "#ff3333" 
             },
-            "Sagittarius": {
-                trait: "Azad panchi. Tumhe travel karna aur naye logo se milna pasand hai. Funny ho.",
-                career: "Travel Vlogger, Pilot, ya Comedian. Desk job tumhare liye nahi hai.",
-                color: "Purple", food: "International", day: "Thursday"
+            "Sagittarius": { 
+                grad: "linear-gradient(to bottom, #8E2DE2, #4A00E0)", // Deep Purple
+                color: "#bd7dfc" 
             },
-            "Capricorn": {
-                trait: "Hardworking aur serious. Tumhare liye career sabse pehle aata hai. Success tumhari guarantee hai.",
-                career: "CEO, Manager, ya Architect. Empire khada karna tumhara shauk hai.",
-                color: "Brown", food: "Traditional", day: "Saturday"
+            "Capricorn": { 
+                grad: "linear-gradient(to bottom, #3E5151, #DECBA4)", // Earthy
+                color: "#DECBA4" 
             },
-            "Aquarius": {
-                trait: "Sabse alag (Unique). Tum duniya se alag sochte ho. Rebel ho par genius bhi.",
-                career: "Scientist, Inventor, ya Techie. Future tum banaoge.",
-                color: "Electric Blue", food: "Weird Combos", day: "Saturday"
+            "Aquarius": { 
+                grad: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Electric Blue
+                color: "#00c6ff" 
             },
-            "Pisces": {
-                trait: "Dreamer ho. Sapno ki duniya me rehte ho. Bohot creative aur artistic ho.",
-                career: "Artist, Musician, ya Writer. Imagination tumhari shakti hai.",
-                color: "Sea Green", food: "Seafood", day: "Thursday"
+            "Pisces": { 
+                grad: "linear-gradient(to bottom, #00d2ff, #3a7bd5)", // Ocean
+                color: "#00d2ff" 
             }
         };
 
-        const bios = [
-            "Just getting cooler with age. 😎", "Limited Edition. ✨", "Vibe hai bhai ki. 🚀", 
-            "Not old, just classic. 💯", "Collecting moments. 📸", "Main apni favourite hoon. 💃"
-        ];
-
         function previewFile() {
             const file = document.querySelector('input[type=file]').files[0];
-            const btn = document.querySelector('.btn-upload');
             if (file) {
                 document.getElementById('uploadText').innerText = "✅ " + file.name;
-                btn.style.borderColor = "#e6683c";
+                document.querySelector('.btn-upload').style.borderColor = "#3b82f6";
             }
         }
 
-        function generateReport() {
-            const name = document.getElementById('nameInput').value || "Legend";
-            let insta = document.getElementById('instaInput').value || "@insta_user";
+        function generateCard() {
+            const name = document.getElementById('nameInput').value || "User";
+            let insta = document.getElementById('instaInput').value || "@user";
             if(!insta.startsWith('@')) insta = '@' + insta;
             const dobInput = document.getElementById('dobInput').value;
 
-            if(!dobInput) { alert("Birthday select karo!"); return; }
+            if(!dobInput) { alert("Please select Date of Birth!"); return; }
 
-            // Photo
+            // Photo Logic
             const file = document.querySelector('input[type=file]').files[0];
             const img = document.getElementById('cardImg');
             if (file) {
@@ -330,7 +325,8 @@
             // Calculations
             const dob = new Date(dobInput);
             const today = new Date();
-            if (dob > today) { alert("Valid date daalo!"); return; }
+            
+            if (dob > today) { alert("Future date not allowed"); return; }
 
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
@@ -338,43 +334,46 @@
             if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
             if (months < 0) { years--; months += 12; }
 
+            // Next Birthday
             const currentYear = today.getFullYear();
             let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
             if (today > nextBirthday) nextBirthday.setFullYear(currentYear + 1);
             const nextDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
             
-            // Get Zodiac Key
+            // Get Zodiac
             const zDay = dob.getDate(); const zMonth = dob.getMonth() + 1;
-            let zodiacKey = getZodiacKey(zDay, zMonth);
-            let zodiacIcon = getZodiacIcon(zodiacKey);
+            let zodiac = getZodiac(zDay, zMonth);
+            
+            // --- APPLY THEME ---
+            const currentTheme = themes[zodiac] || themes["Leo"]; // Default to Leo if fail
+            
+            // 1. Change Top Banner Gradient
+            document.getElementById('themeBanner').style.background = currentTheme.grad;
+            
+            // 2. Change Outer Frame Border (Glow)
+            document.querySelector('.card-frame').style.background = currentTheme.grad;
+            
+            // 3. Change Profile Ring Color
+            document.getElementById('profileRing').style.background = currentTheme.grad;
 
-            // 1. UPDATE CARD
+            // 4. Change Handle Text Color (Fixes highlight bug)
+            document.getElementById('outInsta').style.color = currentTheme.color;
+
+            // Update Text
             document.getElementById('outName').innerText = name;
             document.getElementById('outInsta').innerText = insta;
             document.getElementById('outYears').innerText = years;
             document.getElementById('outMonths').innerText = months;
             document.getElementById('outDays').innerText = days;
-            document.getElementById('outZodiac').innerText = zodiacKey + " " + zodiacIcon;
+            document.getElementById('outZodiac').innerText = zodiac;
             document.getElementById('outNextBday').innerText = nextDays + " Days";
-            document.getElementById('outBio').innerText = bios[Math.floor(Math.random() * bios.length)];
+            document.getElementById('zodiacIcon').innerText = getZodiacIcon(zodiac);
 
-            // 2. UPDATE ASTRO REPORT (The New Stuff)
-            const data = zodiacData[zodiacKey];
-            document.getElementById('astroSignName').innerText = zodiacKey + " " + zodiacIcon;
-            document.getElementById('astroPersonality').innerText = data.trait;
-            document.getElementById('astroCareer').innerText = data.career;
-            document.getElementById('astroColor').innerText = data.color;
-            document.getElementById('astroColor').style.color = data.color.toLowerCase() === 'white' ? 'white' : data.color;
-            document.getElementById('astroFood').innerText = data.food;
-            document.getElementById('astroDay').innerText = data.day;
-
-            // Show Result
-            const resultSection = document.getElementById('resultSection');
-            resultSection.style.display = "block";
-            setTimeout(() => { resultSection.scrollIntoView({ behavior: 'smooth' }); }, 200);
+            document.getElementById('resultSection').style.display = "block";
+            setTimeout(() => { document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' }); }, 100);
         }
 
-        function getZodiacKey(d, m) {
+        function getZodiac(d, m) {
             if((m==1 && d>=20)||(m==2 && d<=18)) return "Aquarius";
             if((m==2 && d>=19)||(m==3 && d<=20)) return "Pisces";
             if((m==3 && d>=21)||(m==4 && d<=19)) return "Aries";
@@ -391,23 +390,30 @@
 
         function getZodiacIcon(sign) {
             const icons = { "Aries": "♈", "Taurus": "♉", "Gemini": "♊", "Cancer": "♋", "Leo": "♌", "Virgo": "♍", "Libra": "♎", "Scorpio": "♏", "Sagittarius": "♐", "Capricorn": "♑", "Aquarius": "♒", "Pisces": "♓" };
-            return icons[sign] || "";
+            return icons[sign] || "✨";
         }
 
         function downloadCard() {
             const card = document.getElementById('downloadArea');
             const btn = document.querySelector('.dl-btn');
             const wm = document.getElementById('watermarkTag');
-            const orig = btn.innerHTML;
+            
+            const originalText = btn.innerHTML;
             btn.innerHTML = "Generating...";
-            wm.style.display = 'none';
-            html2canvas(card, { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
+            wm.style.display = 'none'; // Hide watermark
+            
+            html2canvas(card, { 
+                scale: 3, 
+                backgroundColor: null,
+                useCORS: true
+            }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'My-Viral-Card.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
+                link.download = 'My-Rashi-Card.png';
+                link.href = canvas.toDataURL('image/png');
                 link.click();
-                wm.style.display = 'block';
-                btn.innerHTML = orig;
+                
+                wm.style.display = 'block'; // Show watermark back
+                btn.innerHTML = originalText;
             });
         }
     </script>
