@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator & Premium Life Card - XizoaHub</title>
-    <meta name="description" content="Calculate your exact age, total life stats, and generate a premium shareable card with your Name and Instagram ID.">
+    <title>Age Calculator & Insta Card - XizoaHub</title>
+    <meta name="description" content="Create your Viral Age Card with your Photo. Best Age Calculator by XizoaHub.">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -12,285 +12,346 @@
         :root {
             --bg-color: #050505;
             --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --accent-blue: #3b82f6;
             --card-dark: #0c0c0e;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --border-color: #27272a;
-            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            --insta-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --font-family: 'Inter', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 50px; }
 
         /* Navbar */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #222; }
         .logo { font-weight: 800; font-size: 1.2rem; color: white; text-decoration: none; }
-        .badge { background: linear-gradient(45deg, #3b82f6, #8b5cf6); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
 
-        /* Input Section */
-        .input-card { background-color: #0f1014; border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1rem; text-align: left; }
-        .form-label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+        /* INPUT SECTION */
+        .input-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
         
+        .form-group { margin-bottom: 1rem; }
+        .label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem; }
         input { 
-            background-color: #000; border: 1px solid var(--border-color); 
-            padding: 12px; border-radius: 6px; color: white; width: 100%; 
-            font-size: 1rem; color-scheme: dark;
+            background: #000; border: 1px solid #333; padding: 12px; 
+            border-radius: 6px; color: white; width: 100%; font-size: 1rem;
         }
-        
+
+        /* File Upload Styling */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .btn-upload {
+            border: 2px dashed #444;
+            background: #080808;
+            color: #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .btn-upload:hover { border-color: #bf953f; color: white; }
+        input[type="file"] {
+            font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer;
+        }
+
         .btn-calculate { 
             background: var(--gold-gradient); color: #2c1a00; border: none; 
             padding: 14px; border-radius: 6px; font-weight: 700; width: 100%;
-            cursor: pointer; margin-top: 10px; font-size: 1rem; transition: transform 0.2s;
+            cursor: pointer; margin-top: 10px; font-size: 1rem; 
         }
-        .btn-calculate:hover { transform: scale(1.02); }
 
-        /* --- PREMIUM DOWNLOADABLE CARD --- */
-        #resultSection { display: none; margin-top: 3rem; animation: fadeIn 0.5s ease; }
-        
-        .premium-card-wrapper {
-            background: var(--card-dark);
+        /* --- INSTAGRAM STYLE CARD --- */
+        #resultSection { display: none; margin-top: 2rem; }
+
+        .card-wrapper {
+            background: #000;
             border-radius: 20px;
-            padding: 4px; /* Gold Border width */
-            background-image: var(--gold-gradient);
-            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8);
-            max-width: 400px;
+            overflow: hidden;
+            max-width: 380px;
             margin: 0 auto;
             position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 1px solid #333;
         }
 
-        .premium-card-inner {
-            background: #08080a;
-            border-radius: 17px;
-            padding: 2rem;
+        /* Background Design inside Card */
+        .card-bg {
+            height: 120px;
+            background: var(--insta-gradient);
+            opacity: 0.8;
+        }
+
+        .card-content {
+            padding: 0 1.5rem 2rem 1.5rem;
             text-align: center;
-            /* Texture */
-            background-image: radial-gradient(circle at top right, rgba(191, 149, 63, 0.15) 0%, transparent 50%);
+            margin-top: -60px; /* Pull content up */
         }
 
-        .user-name { font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 5px; text-transform: capitalize; }
-        .user-insta { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1.5rem; font-family: monospace; }
+        /* Profile Image Container */
+        .profile-container {
+            width: 110px; height: 110px;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            padding: 3px;
+            background: #000; /* Gap between ring and photo */
+            position: relative;
+        }
         
-        .main-stat { font-size: 3rem; font-weight: 900; color: #fcf6ba; text-shadow: 0 0 10px rgba(191,149,63,0.3); line-height: 1; }
-        .main-label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid #333; padding-top: 1rem; margin-bottom: 1rem; }
-        .mini-stat h4 { font-size: 0.7rem; color: #666; text-transform: uppercase; }
-        .mini-stat div { font-size: 1rem; font-weight: bold; color: white; }
-
-        .random-bio {
-            font-style: italic; color: #d4d4d8; font-size: 0.85rem;
-            background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;
-            margin-top: 1rem; border-left: 2px solid #bf953f;
+        .profile-ring {
+            position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+            border-radius: 50%;
+            background: var(--insta-gradient);
+            z-index: 0;
         }
 
-        .watermark { margin-top: 15px; font-size: 0.7rem; color: #444; letter-spacing: 2px; text-transform: uppercase; }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #000;
+            position: relative; z-index: 1;
+            background-color: #222;
+        }
 
-        /* Action Buttons */
-        .action-row { display: flex; gap: 10px; justify-content: center; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
-        .btn-action { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #333; background: #111; color: white; cursor: pointer; }
-        .btn-action:hover { background: #222; }
-        .btn-down { background: var(--accent-blue); border: none; }
+        .user-name { font-size: 1.4rem; font-weight: 700; color: white; }
+        .user-handle { color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-        /* --- DETAILED TEXT STATS (The Old Feature) --- */
-        .extra-stats { margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-        .stat-item { background: #111; padding: 1.5rem; border: 1px solid #222; border-radius: 8px; }
-        .stat-item h3 { font-size: 0.8rem; color: #777; text-transform: uppercase; margin-bottom: 5px; }
-        .stat-item p { font-size: 1.2rem; font-weight: bold; color: white; }
+        /* Stats in Card */
+        .stats-row {
+            display: flex; justify-content: space-around;
+            background: #111; border-radius: 12px; padding: 15px;
+            margin-bottom: 1.5rem; border: 1px solid #222;
+        }
+        .stat-box h3 { font-size: 1.5rem; color: white; font-weight: 800; }
+        .stat-box span { font-size: 0.75rem; color: #888; text-transform: uppercase; }
 
-        /* Content & Footer */
-        .content-section { margin-top: 4rem; border-top: 1px solid #222; padding-top: 2rem; }
-        .content-section h2 { color: white; margin-bottom: 1rem; font-size: 1.4rem; }
-        .content-section p { color: #888; margin-bottom: 1rem; font-size: 0.95rem; }
+        .bio-text {
+            font-size: 0.9rem; color: #ddd; font-style: italic;
+            line-height: 1.4; padding: 0 10px;
+        }
+
+        .footer-tag {
+            margin-top: 20px; font-size: 0.7rem; color: #444; letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        /* Buttons */
+        .btn-row { display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem; max-width: 380px; margin-left: auto; margin-right: auto; }
+        .action-btn { flex: 1; padding: 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; }
+        .dl-btn { background: white; color: black; }
+        .share-btn { background: #222; color: white; border: 1px solid #333; }
+
+        /* Extra Info Section */
+        .details-section { margin-top: 4rem; text-align: center; border-top: 1px solid #222; padding-top: 2rem; }
+        .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem; }
+        .d-item { background: #111; padding: 1rem; border-radius: 8px; }
+        .d-item b { display: block; color: white; font-size: 1.1rem; }
+        .d-item span { color: #666; font-size: 0.8rem; }
         
-        footer { margin-top: 4rem; padding: 2rem; border-top: 1px solid #222; text-align: center; color: #666; font-size: 0.9rem; }
-        .footer-links a { color: #888; text-decoration: none; margin: 0 10px; }
-        .footer-links a:hover { color: white; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 600px) { .input-card { padding: 1.5rem 1rem; } .main-stat { font-size: 2.5rem; } }
+        footer { margin-top: 3rem; text-align: center; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">XIZOAHUB</div>
-        <div class="badge">PRO</div>
     </nav>
 
     <div class="container">
         
         <div class="input-card">
-            <h1 style="text-align: center; font-size: 1.8rem; margin-bottom: 1.5rem;">Create Your Life Card</h1>
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Generate Viral Card</h2>
             
             <div class="form-group">
-                <label class="form-label">Your Name</label>
-                <input type="text" id="nameInput" placeholder="Ex: Priyanshu">
+                <label class="label">Choose Profile Photo</label>
+                <div class="file-upload-wrapper">
+                    <button class="btn-upload">📸 Tap to Upload Photo</button>
+                    <input type="file" id="photoInput" accept="image/*" onchange="previewFile()">
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Instagram ID (Optional)</label>
-                <input type="text" id="instaInput" placeholder="Ex: @your_insta_id">
+                <label class="label">Name</label>
+                <input type="text" id="nameInput" placeholder="Your Name">
+            </div>
+            
+            <div class="form-group">
+                <label class="label">Instagram Username</label>
+                <input type="text" id="instaInput" placeholder="@username">
             </div>
 
             <div class="form-group">
-                <label class="form-label">Date of Birth</label>
+                <label class="label">Date of Birth</label>
                 <input type="date" id="dobInput">
             </div>
 
-            <button class="btn-calculate" onclick="generateReport()">Generate Card & Stats</button>
+            <button class="btn-calculate" onclick="generateCard()">Create My Card ✨</button>
         </div>
 
         <div id="resultSection">
             
-            <div class="premium-card-wrapper" id="downloadCard">
-                <div class="premium-card-inner">
-                    <div class="user-name" id="cardName">Unknown</div>
-                    <div class="user-insta" id="cardInsta">@instagram</div>
+            <div class="card-wrapper" id="downloadArea">
+                <div class="card-bg"></div>
+                
+                <div class="card-content">
+                    <div class="profile-container">
+                        <div class="profile-ring"></div>
+                        <img src="https://via.placeholder.com/150" id="cardImg" class="profile-img">
+                    </div>
 
-                    <div class="main-stat" id="cardYears">0</div>
-                    <div class="main-label">YEARS ON EARTH</div>
+                    <div class="user-name" id="outName">Name</div>
+                    <div class="user-handle" id="outInsta">@username</div>
 
-                    <div class="card-grid">
-                        <div class="mini-stat">
-                            <h4>Next Birthday</h4>
-                            <div id="cardNextBday">0 Days</div>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <h3 id="outYears">0</h3>
+                            <span>Years</span>
                         </div>
-                        <div class="mini-stat">
-                            <h4>Zodiac</h4>
-                            <div id="cardZodiac">-</div>
+                        <div class="stat-box">
+                            <h3 id="outMonths">0</h3>
+                            <span>Months</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="outDays">0</h3>
+                            <span>Days</span>
                         </div>
                     </div>
 
-                    <div class="random-bio" id="cardBio">
-                        "Loading bio..."
+                    <div class="bio-text" id="outBio">
+                        "Loading viral bio..."
                     </div>
 
-                    <div class="watermark">xizoahub.github.io</div>
+                    <div class="footer-tag">xizoahub.github.io</div>
                 </div>
             </div>
-
-            <div class="action-row">
-                <button class="btn-action btn-down" onclick="downloadCard()">⬇️ Download HD</button>
-                <button class="btn-action" onclick="window.location.reload()">🔄 Reset</button>
+            <div class="btn-row">
+                <button class="action-btn dl-btn" onclick="downloadCard()">⬇️ Save Image</button>
+                <button class="action-btn share-btn" onclick="window.location.reload()">🔄 New</button>
             </div>
 
-            <h2 style="margin-top: 3rem; text-align: center; color: white;">Deep Life Analysis</h2>
-            <div class="extra-stats">
-                <div class="stat-item">
-                    <h3>Exact Age</h3>
-                    <p id="detailAge">0Y 0M 0D</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Total Hours Lived</h3>
-                    <p id="detailHours">0</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Born On</h3>
-                    <p id="detailDay">Sunday</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Years Slept (Approx)</h3>
-                    <p id="detailSleep">0 Years</p>
+            <div class="details-section">
+                <h3>Life Summary</h3>
+                <div class="detail-grid">
+                    <div class="d-item">
+                        <b id="dHours">0</b>
+                        <span>Hours Lived</span>
+                    </div>
+                    <div class="d-item">
+                        <b id="dDay">Sunday</b>
+                        <span>Born Day</span>
+                    </div>
+                    <div class="d-item">
+                        <b id="dZodiac">-</b>
+                        <span>Zodiac</span>
+                    </div>
+                    <div class="d-item">
+                        <b id="dNext">0 Days</b>
+                        <span>Next B'day</span>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="content-section">
-            <h2>About This Tool</h2>
-            <p>XizoaHub Age Calculator sirf age nahi batata, ye aapki life ka ek snapshot create karta hai. Aap apna personalized card download kar sakte hain jisme aapka Naam aur Instagram ID hoga.</p>
-            
-            <h2>Privacy Note</h2>
-            <p>Hum koi bhi data save nahi karte. Aapka Naam, DOB aur Insta ID sirf aapke browser me process hota hai card banane ke liye. Server par kuch nahi jata.</p>
-        </div>
+        <footer>
+            &copy; 2025 XizoaHub Tools. <br>
+            <a href="#" style="color:#555; text-decoration:none;">Privacy</a> | <a href="#" style="color:#555; text-decoration:none;">Contact</a>
+        </footer>
 
     </div>
 
-    <footer>
-        <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Contact</a>
-        </div>
-        <p style="margin-top: 1rem;">&copy; 2024-2025 XizoaHub. Designed by Priyanshu.</p>
-    </footer>
-
     <script>
-        const bioList = [
-            "Dharti pe bohot time ho gaya, update kab aayega? 🤔",
-            "Professional procrastinator. Still alive, big achievement.",
-            "Main itna purana hoon, maine internet ko slow dekha hai.",
-            "Life ka free trial khatam, subscription mehenga hai. 💸",
-            "Oxygen to CO2 converter since birth. Good job me.",
-            "Age is just a number, but my back pain is real. 🦴",
-            "Galti se mistake karke yaha tak pahunch gaye.",
-            "Collecting years like Pokémons. Gotta catch 'em all!",
-            "Vibe check: Surviving on chai and hope. ☕"
+        const bios = [
+            "Just getting cooler with age. 😎",
+            "Limited Edition. There is only one me.",
+            "Leveling up my life stats. 🚀",
+            "Not old, just classic. ✨",
+            "Surviving earth since day 1.",
+            "Collecting moments, not things.",
+            "Main apni favourite hoon. 💃",
+            "Loading next chapter... ⏳"
         ];
 
-        function generateReport() {
-            const name = document.getElementById('nameInput').value || "Mortal Human";
-            let insta = document.getElementById('instaInput').value;
+        // Handle Photo Upload Preview
+        function previewFile() {
+            const preview = document.querySelector('.btn-upload');
+            const file = document.querySelector('input[type=file]').files[0];
+            if (file) {
+                preview.innerText = "✅ Photo Selected: " + file.name;
+                preview.style.borderColor = "#4CAF50";
+                preview.style.color = "#4CAF50";
+            }
+        }
+
+        function generateCard() {
+            const name = document.getElementById('nameInput').value || "User";
+            let insta = document.getElementById('instaInput').value || "@user";
+            if(!insta.startsWith('@')) insta = '@' + insta;
             const dobInput = document.getElementById('dobInput').value;
 
-            if (!dobInput) { alert("Please select Date of Birth!"); return; }
-            if (insta && !insta.startsWith('@')) insta = '@' + insta;
-            if (!insta) insta = "";
+            if(!dobInput) { alert("Date of birth daalo bhai!"); return; }
 
+            // Photo Logic
+            const file = document.querySelector('input[type=file]').files[0];
+            const img = document.getElementById('cardImg');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    img.src = reader.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // Default avatar if no photo uploaded
+                img.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+            }
+
+            // Calculation
             const dob = new Date(dobInput);
             const today = new Date();
+            
+            if (dob > today) { alert("Future date mat daalo!"); return; }
 
-            if (dob > today) { alert("Future date not allowed!"); return; }
-
-            // -- CALCULATION LOGIC --
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
             let days = today.getDate() - dob.getDate();
             if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
             if (months < 0) { years--; months += 12; }
 
-            // Next Bday
+            const diffTime = Math.abs(today - dob);
+            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
+            const dayName = dob.toLocaleDateString('en-US', { weekday: 'long' });
+
+            // Next Birthday
             const currentYear = today.getFullYear();
             let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
             if (today > nextBirthday) nextBirthday.setFullYear(currentYear + 1);
-            const daysLeft = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+            const nextDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
 
             // Zodiac
             const zDay = dob.getDate(); const zMonth = dob.getMonth() + 1;
             let zodiac = getZodiac(zDay, zMonth);
 
-            // Extra Stats
-            const diffTime = Math.abs(today - dob);
-            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
-            const dayName = dob.toLocaleDateString('en-US', { weekday: 'long' });
-            const sleepYears = (years / 3).toFixed(1);
+            // Update UI
+            document.getElementById('outName').innerText = name;
+            document.getElementById('outInsta').innerText = insta;
+            document.getElementById('outYears').innerText = years;
+            document.getElementById('outMonths').innerText = months;
+            document.getElementById('outDays').innerText = days;
+            document.getElementById('outBio').innerText = bios[Math.floor(Math.random() * bios.length)];
 
-            // -- UPDATE UI --
-            
-            // 1. Card Updates
-            document.getElementById('cardName').innerText = name;
-            document.getElementById('cardInsta').innerText = insta;
-            document.getElementById('cardYears').innerText = years;
-            document.getElementById('cardNextBday').innerText = `${daysLeft} Days`;
-            document.getElementById('cardZodiac').innerText = zodiac;
-            document.getElementById('cardBio').innerText = `"${bioList[Math.floor(Math.random() * bioList.length)]}"`;
+            document.getElementById('dHours').innerText = totalHours.toLocaleString();
+            document.getElementById('dDay').innerText = dayName;
+            document.getElementById('dZodiac').innerText = zodiac;
+            document.getElementById('dNext').innerText = nextDays + " Days";
 
-            // 2. Deep Stats Updates
-            document.getElementById('detailAge').innerText = `${years}Y ${months}M ${days}D`;
-            document.getElementById('detailHours').innerText = totalHours.toLocaleString();
-            document.getElementById('detailDay').innerText = dayName;
-            document.getElementById('detailSleep').innerText = `${sleepYears} Years`;
-
-            // Show Result
             document.getElementById('resultSection').style.display = "block";
-            
-            // Scroll to card
             setTimeout(() => {
                 document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
             }, 100);
@@ -312,17 +373,16 @@
         }
 
         function downloadCard() {
-            const card = document.getElementById('downloadCard');
-            const btn = document.querySelector('.btn-down');
-            const originalText = btn.innerText;
-            btn.innerText = "Generating...";
-
-            html2canvas(card, { scale: 2, backgroundColor: null }).then(canvas => {
+            const card = document.getElementById('downloadArea');
+            const btn = document.querySelector('.dl-btn');
+            btn.innerText = "Processing...";
+            
+            html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'XizoaHub-Life-Card.png';
+                link.download = 'Insta-Age-Card.png';
                 link.href = canvas.toDataURL();
                 link.click();
-                btn.innerText = originalText;
+                btn.innerText = "⬇️ Save Image";
             });
         }
     </script>
