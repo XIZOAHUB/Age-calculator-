@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator - XizoaHub</title>
+    <title>Age Calculator & Life Stats - XizoaHub</title>
+    <meta name="description" content="Calculate your exact age, zodiac sign, next birthday countdown, and total life stats instantly. Best Age Calculator tool by XizoaHub.">
     <style>
         :root {
             --bg-color: #050505;
@@ -11,372 +12,219 @@
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
             --accent-blue: #3b82f6;
-            --accent-blue-hover: #2563eb;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
             --border-color: #27272a;
             --font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-family);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        /* Navbar Styling */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        .badge {
-            background-color: #ef4444;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .menu-icon {
-            color: var(--text-main);
-            cursor: pointer;
-        }
+        /* Navbar & Mobile Menu (Same as before) */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); position: relative; z-index: 100; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; color: white; text-decoration: none; }
+        .badge { background-color: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+        .menu-icon { cursor: pointer; padding: 5px; }
+        .mobile-menu { display: none; position: absolute; top: 60px; right: 1.5rem; background-color: #18181b; border: 1px solid var(--border-color); width: 200px; padding: 0.5rem; border-radius: 8px; flex-direction: column; z-index: 999; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: var(--text-muted); text-decoration: none; padding: 10px; border-radius: 6px; }
+        .mobile-menu a:hover { background-color: var(--accent-blue); color: white; }
 
         /* Main Container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
 
-        /* Tool Section */
-        .tool-card {
-            background-color: #0f1014;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
+        /* Input Section */
+        .tool-card { background-color: #0f1014; border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
+        .input-group { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto; }
+        input[type="date"] { background-color: #000; border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; color: white; width: 100%; color-scheme: dark; }
+        .btn-calculate { background-color: var(--accent-blue); color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        
+        /* RESULT GRID (Unique Feature) */
+        #resultSection { display: none; margin-top: 2rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        
+        .stat-box { background: #18181b; padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); text-align: left; }
+        .stat-box h3 { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 1.4rem; font-weight: 700; color: white; }
+        .highlight-blue { color: var(--accent-blue); }
+        .highlight-purple { color: var(--accent-purple); }
+        .highlight-green { color: var(--accent-green); }
 
-        .tool-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .tool-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        input[type="date"] {
-            background-color: #000;
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            border-radius: 6px;
-            color: white;
-            font-size: 1rem;
-            width: 100%;
-            color-scheme: dark;
-        }
-
-        .btn-calculate {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-calculate:hover {
-            background-color: var(--accent-blue-hover);
-        }
-
-        /* Result Area */
-        #result {
-            margin-top: 2rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .result-box {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid var(--accent-blue);
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .age-main {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-blue);
-        }
-
-        .age-details {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
+        /* Extra Info */
+        .fun-fact { margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.05); border-left: 3px solid var(--accent-blue); border-radius: 4px; text-align: left; font-size: 0.9rem; color: #d4d4d8; }
 
         /* Content Text */
-        .content-section {
-            margin-bottom: 3rem;
-        }
+        .content-section { margin-top: 3rem; }
+        h2 { font-size: 1.4rem; margin-top: 2rem; color: #fff; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        footer { border-top: 1px solid var(--border-color); padding: 2rem 1rem; margin-top: 4rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
 
-        h2 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            margin-top: 2rem;
-            color: #fff;
-        }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        ul {
-            list-style-position: inside;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .footer-col h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-col a {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-col a:hover {
-            color: var(--accent-blue);
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            color: #52525b;
-            font-size: 0.8rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .tool-title { font-size: 1.5rem; }
-            .tool-card { padding: 1.5rem 1rem; }
-        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo-area">
-            <div class="logo">XIZOAHUB</div>
-            <div class="badge">Tools</div>
+            <a href="#" class="logo">XIZOAHUB</a>
+            <div class="badge">Pro Tool</div>
         </div>
-        <div class="menu-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <div class="menu-icon" onclick="toggleMenu()">
+             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">🏠 Home</a>
+            <a href="#">🔥 Trending Tools</a>
+            <a href="#">📞 Contact</a>
         </div>
     </nav>
 
     <div class="container">
         
         <div class="tool-card">
-            <h1 class="tool-title">Age Calculator Online</h1>
-            <p class="tool-subtitle">Apna Date of Birth daalo aur exact age pata karo.</p>
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Age Calculator & Life Stats</h1>
+            <p style="color: #a1a1aa; margin-bottom: 2rem;">Sirf Age nahi, apni poori Kundli (Stats) dekho.</p>
 
             <div class="input-group">
                 <input type="date" id="dobInput">
-                <button class="btn-calculate" onclick="calculateAge()">Calculate Age</button>
+                <button class="btn-calculate" onclick="calculateStats()">Analyze My Life</button>
             </div>
+        </div>
 
-            <div id="result">
-                <div class="result-box">
-                    <div class="age-main" id="yearsDisplay">0 Years</div>
-                    <div class="age-details" id="detailsDisplay">0 Months | 0 Days</div>
+        <div id="resultSection">
+            <div class="stats-grid">
+                <div class="stat-box" style="border-color: var(--accent-blue);">
+                    <h3>Current Age</h3>
+                    <div class="stat-value highlight-blue" id="exactAge">0 Years</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;" id="exactDays">0 Days</div>
+                </div>
+
+                <div class="stat-box" style="border-color: var(--accent-purple);">
+                    <h3>Next Birthday In</h3>
+                    <div class="stat-value highlight-purple" id="nextBday">0 Days</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Party ready rakho!</div>
+                </div>
+
+                <div class="stat-box" style="border-color: var(--accent-green);">
+                    <h3>Zodiac Sign</h3>
+                    <div class="stat-value highlight-green" id="zodiacSign">-</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Astrology check.</div>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Total Hours Lived</h3>
+                    <div class="stat-value" id="totalHours">0</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Itna time spend kiya dharti pe.</div>
+                </div>
+
+                 <div class="stat-box">
+                    <h3>Born On</h3>
+                    <div class="stat-value" id="birthDayName">-</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">Day of the week.</div>
+                </div>
+
+                 <div class="stat-box">
+                    <h3>Time Spent Sleeping</h3>
+                    <div class="stat-value" id="sleepTime">0 Years</div>
+                    <div style="font-size: 0.8rem; color: #71717a; margin-top:5px;">(Approx 8 hours/day)</div>
                 </div>
             </div>
+
+            <div class="fun-fact" id="summaryLine">
+                Result loaded successfully.
+            </div>
         </div>
 
         <div class="content-section">
-            <h2>Age Calculator – Bas DOB Dalo Aur Hisaab Clear</h2>
+            <h2>Why This Tool is Different?</h2>
             <p>
-                Dekh bhai, math me hum sab thode kachche ho sakte hain, ya fir simple aalsi. Isliye ye tool banaya — seedha, simple, kaam wali cheez. Tum bas apna janamdin (Date of Birth) select karo aur ek second me tumhari exact age tumhare saamne aa jayegi.
+                Ye bas simple age calculator nahi hai. Ye tumhari life ka ek mini-dashboard hai. Hum calculate karte hain tumhare total ghante, tumhara aane wala birthday aur tumhari zodiac sign. 
             </p>
-            <p>
-                Ye site speed ke liye optimized hai, isme koi bekaar cheez nahi daali — na ads, na sign-up, na tracking. Sirf kaam ki cheez. Ekdum clean vibe.
-            </p>
-
-            <h2>★ Kya Kya Bata Sakta Hai Ye Tool?</h2>
-            <ul>
-                <li>• Exact Years, Months aur Days</li>
-                <li>• Next Birthday kab hai ye bhi bata dega (future update me)</li>
-                <li>• Mobile se bhi easily use ho jata hai</li>
-                <li>• Koi logging, koi signup — bilkul free</li>
-            </ul>
-
-            <h2>★ Ye Actually Kaise Kaam Karta Hai?</h2>
-            <p>
-                Tumhara browser aaj ki date aur tumhari di gayi date ke beech ka difference calculate karta hai. Sab kuch tumhare phone/PC pe hi hota hai, data kahi server pe nahi jata. Safe and secure.
-            </p>
-        </div>
-
-        <div class="content-section">
-            <h2 style="margin-bottom: 1.5rem;">Frequently Asked Questions (Seedhi Baat Version)</h2>
-
-            <h3 style="color:white; margin-top:1.5rem; font-size:1.1rem;">Q1: Ye accurate hai na?</h3>
-            <p>Haan bhai, bilkul. Calendar logic use karta hai jo leap years ko bhi count karta hai. Tension ki koi baat nahi.</p>
-
-            <h3 style="color:white; margin-top:1.5rem; font-size:1.1rem;">Q2: Ye free hi rahega?</h3>
-            <p>Haan. Ye tool paisa kamane ke liye nahi banaya. Simple cheez: kaam karo, aur nikal jao.</p>
-
-            <h3 style="color:white; margin-top:1.5rem; font-size:1.1rem;">Q3: Mera data save to nahi karte?</h3>
-            <p>Nope. Bilkul nahi. Date calculation tumhare browser me process hota hai — server pe kuchh bhi store nahi hota.</p>
-
-            <h3 style="color:white; margin-top:1.5rem; font-size:1.1rem;">Q4: Mobile me bhi chalega?</h3>
-            <p>Haan, poori site mobile friendly hai. Phone se age check karna aur bhi easy ho jata hai.</p>
+            <h2>How It Works?</h2>
+            <p>JavaScript ke complex algorithms use karke hum Gregorian calendar ke hisaab se tumhara data process karte hain. Data browser me hi rehta hai, safe & secure.</p>
         </div>
 
     </div>
 
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Explore More Tools</h3>
-                <a href="#">YouTube Downloader</a>
-                <a href="#">SEO Checker</a>
-                <a href="#">PDF Tools</a>
-            </div>
-            <div class="footer-col">
-                <h3>Important Pages</h3>
-                <a href="#">About</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
-            <div class="footer-col">
-                <h3>Connect</h3>
-                <a href="#">GitHub</a>
-                <a href="#">YouTube Channel</a>
-                <a href="#">Twitter / X</a>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2024-2025 <strong>XizoaHub</strong>. All Rights Reserved.<br>
-            Created & Designed by Priyanshu.
-        </div>
+        <p>&copy; 2024-2025 XizoaHub. Built for curious minds.</p>
     </footer>
 
     <script>
-        function calculateAge() {
-            const dobInput = document.getElementById('dobInput').value;
-            const resultDiv = document.getElementById('result');
-            const yearsDisplay = document.getElementById('yearsDisplay');
-            const detailsDisplay = document.getElementById('detailsDisplay');
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
 
-            if (!dobInput) {
-                alert("Bhai date to select kar pehle!");
-                return;
-            }
+        function calculateStats() {
+            const dobInput = document.getElementById('dobInput').value;
+            if (!dobInput) { alert("Please select a date first!"); return; }
 
             const dob = new Date(dobInput);
             const today = new Date();
 
-            if (dob > today) {
-                alert("Bhai future se aaya hai kya? Valid date daal.");
-                return;
-            }
+            if (dob > today) { alert("Future date not allowed!"); return; }
 
+            // 1. Exact Age
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
             let days = today.getDate() - dob.getDate();
+            if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
+            if (months < 0) { years--; months += 12; }
+            document.getElementById('exactAge').innerText = `${years} Years`;
+            document.getElementById('exactDays').innerText = `${months} Months, ${days} Days`;
 
-            // Adjust for negative days/months
-            if (days < 0) {
-                months--;
-                // Get days in previous month
-                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-                days += lastMonth.getDate();
-            }
-
-            if (months < 0) {
-                years--;
-                months += 12;
-            }
-
-            // Update UI
-            yearsDisplay.innerText = `${years} Years Old`;
-            detailsDisplay.innerText = `${months} Months | ${days} Days`;
+            // 2. Next Birthday Countdown
+            const currentYear = today.getFullYear();
+            let nextBirthday = new Date(dob.getMonth() + 1 + '/' + dob.getDate() + '/' + currentYear); // MM/DD/YYYY fix
+            // Correcting Date Object creation for next birthday to ensure valid parsing
+            nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
             
-            resultDiv.style.display = "block";
+            if (today > nextBirthday) {
+                nextBirthday.setFullYear(currentYear + 1);
+            }
+            const timeDiff = nextBirthday - today;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('nextBday').innerText = `${daysLeft} Days`;
+
+            // 3. Zodiac Sign
+            const zDay = dob.getDate();
+            const zMonth = dob.getMonth() + 1;
+            let zodiac = "";
+            
+            if ((zMonth == 1 && zDay >= 20) || (zMonth == 2 && zDay <= 18)) zodiac = "Aquarius (Kumbh)";
+            else if ((zMonth == 2 && zDay >= 19) || (zMonth == 3 && zDay <= 20)) zodiac = "Pisces (Meen)";
+            else if ((zMonth == 3 && zDay >= 21) || (zMonth == 4 && zDay <= 19)) zodiac = "Aries (Mesh)";
+            else if ((zMonth == 4 && zDay >= 20) || (zMonth == 5 && zDay <= 20)) zodiac = "Taurus (Vrish)";
+            else if ((zMonth == 5 && zDay >= 21) || (zMonth == 6 && zDay <= 20)) zodiac = "Gemini (Mithun)";
+            else if ((zMonth == 6 && zDay >= 21) || (zMonth == 7 && zDay <= 22)) zodiac = "Cancer (Kark)";
+            else if ((zMonth == 7 && zDay >= 23) || (zMonth == 8 && zDay <= 22)) zodiac = "Leo (Simha)";
+            else if ((zMonth == 8 && zDay >= 23) || (zMonth == 9 && zDay <= 22)) zodiac = "Virgo (Kanya)";
+            else if ((zMonth == 9 && zDay >= 23) || (zMonth == 10 && zDay <= 22)) zodiac = "Libra (Tula)";
+            else if ((zMonth == 10 && zDay >= 23) || (zMonth == 11 && zDay <= 21)) zodiac = "Scorpio (Vrishchik)";
+            else if ((zMonth == 11 && zDay >= 22) || (zMonth == 12 && zDay <= 21)) zodiac = "Sagittarius (Dhanu)";
+            else zodiac = "Capricorn (Makar)";
+            
+            document.getElementById('zodiacSign').innerText = zodiac;
+
+            // 4. Total Hours & Sleep
+            const diffTime = Math.abs(today - dob);
+            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
+            document.getElementById('totalHours').innerText = totalHours.toLocaleString();
+            
+            // Assume 8 hours sleep per day (1/3 of life)
+            const sleepYears = (years / 3).toFixed(1);
+            document.getElementById('sleepTime').innerText = `${sleepYears} Years`;
+
+            // 5. Day of Birth
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            document.getElementById('birthDayName').innerText = daysOfWeek[dob.getDay()];
+
+            // Summary Text
+            document.getElementById('summaryLine').innerText = `Oho! Tum ${daysOfWeek[dob.getDay()]} ko paida hue the aur ab tak ${totalHours.toLocaleString()} ghante jee chuke ho.`;
+
+            // Show Result
+            document.getElementById('resultSection').style.display = "block";
         }
     </script>
 </body>
