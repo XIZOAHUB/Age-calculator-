@@ -3,145 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator Viral Insta Card Making About Card</title>
-
-<meta name="description" content="Sirf Age nahi, apna Viral Instagram Card banao! Check exact age, days left for birthday, zodiac sign (Rashi), and personality traits. Download HD Card for Free.">
-
-<meta name="keywords" content="age calculator, zodiac sign calculator, rashi finder, instagram age card, viral birthday card, life stats, age calculator online, priyanshu age tool,Age Calculator Viral Insta Card Making About Card,viral trending card generator">
-
-<meta property="og:title" content="Age Calculator Viral Insta Card Making About Card🚀">
-<meta property="og:description" content="Maine apni Age aur Rashi ka Viral Card banaya. Tum bhi try karo! Free & No Login.">
-<meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/847/847969.png">
+    <title>Premium Age Calculator & Golden Card | XizoaHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
     <style>
         :root {
-            --bg-color: #000000;
+            --bg-color: #05080f; /* XizoaHub Dark Background */
+            --card-bg: #0f1623;
             --text-main: #ffffff;
-            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            --default-gradient: linear-gradient(45deg, #f09433, #bc1888);
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --gold-light: #FFD700;
+            --gold-dark: #B8860B;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
-        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 50px; }
-
-        nav { display: flex; justify-content: center; padding: 1rem; border-bottom: 1px solid #222; }
-        .logo { font-weight: 900; font-size: 1.5rem; color: white; letter-spacing: 1px; }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
-
-        .input-card { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 1.5rem; margin-bottom: 3rem; }
-        .form-group { margin-bottom: 1.2rem; }
-        .label { display: block; margin-bottom: 0.5rem; color: #bbb; font-size: 0.9rem; font-weight: 600; }
-        input { background: #0a0a0a; border: 1px solid #444; padding: 12px; border-radius: 8px; color: white; width: 100%; outline: none; }
-        
-        .file-upload-wrapper { position: relative; overflow: hidden; display: block; }
-        .btn-upload { border: 2px dashed #555; background: rgba(255,255,255,0.05); color: #ccc; padding: 20px; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
-        input[type="file"] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
-
-        .btn-calculate { background: white; color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 10px; font-size: 1.1rem; }
-
-        /* --- CARD DESIGN --- */
-        #resultSection { display: none; margin-top: 2rem; }
-
-        .card-frame {
-            padding: 3px;
-            background: #333; /* Default, will change via JS */
-            border-radius: 24px;
-            max-width: 400px;
-            margin: 0 auto;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
-        .card-wrapper {
-            background: #050505; 
-            border-radius: 21px; 
-            overflow: hidden; 
-            position: relative;
-            text-align: center;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .card-banner {
-            height: 140px;
+        /* --- Header/Navbar --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(5, 8, 15, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Input Form Section --- */
+        .tool-box {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], input[type="date"], input[type="file"] {
             width: 100%;
-            background: var(--default-gradient);
-            opacity: 0.8;
-            /* Smooth fade out */
-            mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            padding: 12px;
+            background: #1a2233;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
         }
 
-        .card-content {
-            padding: 0 2rem 2.5rem 2rem;
-            margin-top: -80px;
-            position: relative; 
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
+            color: #000;
+            font-weight: 800;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-generate:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* --- The Card Output Area --- */
+        #resultArea {
+            margin-top: 30px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* PREMIUM GOLD CARD STYLES */
+        .gold-card {
+            width: 350px;
+            height: 550px; /* Instagram Story Ratio-ish */
+            border-radius: 20px;
+            position: relative;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            color: #000;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 4px solid #fff;
+            overflow: hidden;
+            /* Default Background - will be overridden by JS */
+            background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+        }
+
+        /* Watermark Pattern Overlay */
+        .gold-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1h2v2H1V1zm4 0h2v2H5V1zm4 0h2v2H9V1z' fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .card-header {
+            z-index: 2;
+        }
+        
+        .crown-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: #3e2723;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .premium-badge {
+            background: #000;
+            color: var(--gold-light);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .user-photo-frame {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.8);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            z-index: 2;
+            margin: 10px 0;
+            background: #fff;
+        }
+
+        .user-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-details {
             z-index: 2;
         }
 
-        .profile-container {
-            width: 140px; height: 140px;
-            margin: 0 auto 10px auto;
-            border-radius: 50%;
-            padding: 4px;
-            background: #333; /* Default */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .user-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif; /* Or keep Inter */
+            color: #2c1a06;
         }
 
-        .profile-img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #050505; 
-            background-color: #222;
-        }
-
-        .user-name { font-size: 1.8rem; font-weight: 800; color: white; margin-top: 10px; }
-        
-        /* FIX: Removed background property completely */
-        .user-handle { 
-            font-size: 1.1rem; 
-            margin-bottom: 1.5rem; 
-            font-weight: 700;
-            color: #ccc; /* Will be replaced by theme color */
-            background: none !important; /* Forces no box */
-            -webkit-text-fill-color: initial !important; /* Disables gradient text glitch */
-        }
-
-        .badges-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; }
-        .badge-item { 
-            display: flex; align-items: center; gap: 6px; 
-            background: rgba(255,255,255,0.1); 
-            border: 1px solid rgba(255,255,255,0.15); 
-            padding: 8px 14px; border-radius: 50px; 
-            font-size: 0.85rem; color: #eee; font-weight: 600; 
-        }
-
-        .stats-box {
-            background: #111; 
-            border-radius: 16px;
-            padding: 20px; 
-            border: 1px solid #222;
-            display: flex; justify-content: space-around; 
-            margin-bottom: 1.5rem;
-        }
-        .stat div { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.1; }
-        .stat span { font-size: 0.7rem; color: #777; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-
-        .footer-tag { 
-            margin-top: 20px; font-size: 0.7rem; color: #444; 
-            font-weight: 700; letter-spacing: 2px; text-transform: uppercase; 
-        }
-
-        .btn-row { display: flex; gap: 15px; justify-content: center; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
-        .action-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; }
-        .dl-btn { background: #3b82f6; color: white; }
-        .reset-btn { background: #222; color: white; border: 1px solid #333; }
-        
-        /* Bio Style */
-        .bio-text {
-            font-size: 0.95rem; color: #aaa; font-style: italic;
+        .age-display {
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 8px;
+            display: inline-block;
             margin-bottom: 10px;
+        }
+
+        .quote-box {
+            font-style: italic;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin: 10px 0;
+            z-index: 2;
+            font-weight: 600;
+            color: #3e2723;
+        }
+
+        .card-footer {
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+        }
+
+        .download-btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: var(--text-main);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Text Content Section (FAQ Style) --- */
+        .content-section {
+            margin-top: 50px;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 60px;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+        
+        .social-links a {
+            color: var(--text-muted);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Helper for hidden canvas rendering */
+        #captureContainer {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
         }
 
     </style>
@@ -149,226 +332,240 @@
 <body>
 
     <nav>
-        <div class="logo">XIZOAHUB</div>
+        <div class="logo">
+            XIZOAHUB <span class="badge">Tools</span>
+        </div>
+        <div>
+            <i class="fab fa-github fa-lg" style="color: white;"></i>
+        </div>
     </nav>
 
     <div class="container">
-        
-        <div class="input-card">
-            <h2 style="margin-bottom: 2rem; text-align: center; color:white;">Create Viral Card 🚀</h2>
-            
+        <h1>Golden Age Calculator Card</h1>
+        <p class="subtitle">Apni Age calculate karo aur ek Premium Golden Card generate karo. Bas details dalo, photo chipkao aur rutba dekho!</p>
+
+        <div class="tool-box">
             <div class="form-group">
-                <div class="file-upload-wrapper">
-                    <button class="btn-upload">
-                        <span id="uploadText">📸 Upload Photo</span>
-                    </button>
-                    <input type="file" id="photoInput" accept="image/*" onchange="previewFile()">
+                <label>★ Tumhara Naam (Name)</label>
+                <input type="text" id="userName" placeholder="Ex: Priyanshu King">
+            </div>
+
+            <div class="form-group">
+                <label>★ Janamdin Kab Aata Hai? (DOB)</label>
+                <input type="date" id="userDob">
+            </div>
+
+            <div class="form-group">
+                <label>★ Instagram Username (Bina @ ke)</label>
+                <input type="text" id="userInsta" placeholder="Ex: i_am_priyanshu">
+            </div>
+
+            <div class="form-group">
+                <label>★ Ek Khatarnak Photo Upload Karo</label>
+                <input type="file" id="userPhoto" accept="image/*">
+            </div>
+
+            <button class="btn-generate" onclick="generateCard()">
+                Generate Premium Card <i class="fas fa-magic"></i>
+            </button>
+        </div>
+
+        <div id="resultArea">
+            <h3 style="margin-bottom: 15px; color: var(--gold-light);">Ye lo tumhara Premium Card 👇</h3>
+            
+            <div id="cardPreview" class="gold-card">
+                <div class="card-header">
+                    <div class="crown-icon"><i class="fas fa-crown"></i></div>
+                    <div class="premium-badge">V.I.P MEMBER</div>
+                </div>
+
+                <div class="user-photo-frame">
+                    <img id="cardImg" src="https://via.placeholder.com/150" alt="User">
+                </div>
+
+                <div class="user-details">
+                    <div class="user-name" id="cardName">NAME HERE</div>
+                    <div class="age-display" id="cardAge">00 Years • 00 Months</div>
+                </div>
+
+                <div class="quote-box" id="cardQuote">
+                    "Success is not final, failure is not fatal."
+                </div>
+
+                <div class="card-footer">
+                    <i class="fab fa-instagram"></i>
+                    <span id="cardInsta">@username</span>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="label">Name</label>
-                <input type="text" id="nameInput" placeholder="Name">
-            </div>
-            
-            <div class="form-group">
-                <label class="label">Instagram</label>
-                <input type="text" id="instaInput" placeholder="@username">
-            </div>
-
-            <div class="form-group">
-                <label class="label">Birthday</label>
-                <input type="date" id="dobInput">
-            </div>
-
-            <button class="btn-calculate" onclick="generateCard()">Generate Card ✨</button>
+            <button class="download-btn" onclick="downloadImage()">
+                <i class="fas fa-download"></i> Download Card (HD)
+            </button>
+            <p style="margin-top:10px; font-size: 0.8rem; color: #666;">Note: Har baar generate click karne par naya design milega!</p>
         </div>
 
-        <div id="resultSection">
+        <div class="content-section">
+            <h2 style="margin-bottom: 20px;">Frequently Asked Questions (Seedhi Baat Version)</h2>
             
-            <div class="card-frame" id="downloadArea">
-                <div class="card-wrapper">
-                    
-                    <div class="card-banner" id="themeBanner"></div>
-                    
-                    <div class="card-content">
-                        <div class="profile-container" id="profileRing">
-                            <img src="https://via.placeholder.com/150" id="cardImg" class="profile-img">
-                        </div>
-
-                        <div class="user-name" id="outName">Name</div>
-                        
-                        <div class="user-handle" id="outInsta">@username</div>
-
-                        <div class="badges-row">
-                            <div class="badge-item">
-                                <span id="zodiacIcon">✨</span>
-                                <span id="outZodiac">Zodiac</span>
-                            </div>
-                            <div class="badge-item">
-                                <span>🎂</span>
-                                <span id="outNextBday">0 Days</span>
-                            </div>
-                        </div>
-
-                        <div class="stats-box">
-                            <div class="stat"><div id="outYears">0</div><span>Years</span></div>
-                            <div class="stat"><div id="outMonths">0</div><span>Months</span></div>
-                            <div class="stat"><div id="outDays">0</div><span>Days</span></div>
-                        </div>
-                        
-                        <div class="bio-text" id="outBio">"Not old, just classic."</div>
-
-                        <div class="footer-tag" id="watermarkTag">xizoahub.github.io</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="btn-row">
-                <button class="action-btn dl-btn" onclick="downloadCard()">⬇️ Save Card</button>
-                <button class="action-btn reset-btn" onclick="window.location.reload()">🔄 New</button>
+            <div class="faq-item">
+                <div class="faq-question">Q1: Ye tool kya karta hai?</div>
+                <div class="faq-answer">Bhai simple hai, tumhara DOB leta hai, accurate age nikalta hai aur ekdum professional Golden Card banake deta hai jo tum story ya status pe laga sakte ho.</div>
             </div>
 
+            <div class="faq-item">
+                <div class="faq-question">Q2: Card ka design change hota hai kya?</div>
+                <div class="faq-answer">Haan! Mere pass 24+ templates ka logic laga hai. Jab bhi tum "Generate" button dabao ge, background aur style change ho jayega. Try karke dekho.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q3: Photo upload karna safe hai?</div>
+                <div class="faq-answer">100% Safe. Sab kuch tumhare browser (phone) mein hi hota hai. Humare server par koi photo save nahi hoti. Chill raho.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q4: Paisa lagega kya?</div>
+                <div class="faq-answer">Bilkul nahi. XizoaHub par sab tools free hain. Bas enjoy karo aur share karo.</div>
+            </div>
         </div>
+
     </div>
 
-    <script>
-        // --- ZODIAC THEME ENGINE ---
-        const themes = {
-            "Aries": { grad: "linear-gradient(to bottom, #ff4b1f, #ff9068)", color: "#ff9068" },
-            "Taurus": { grad: "linear-gradient(to bottom, #11998e, #38ef7d)", color: "#38ef7d" },
-            "Gemini": { grad: "linear-gradient(to bottom, #fc4a1a, #f7b733)", color: "#f7b733" },
-            "Cancer": { grad: "linear-gradient(to bottom, #2193b0, #6dd5ed)", color: "#6dd5ed" },
-            "Leo": { grad: "linear-gradient(to bottom, #f12711, #f5af19)", color: "#f5af19" },
-            "Virgo": { grad: "linear-gradient(to bottom, #D3CCE3, #E9E4F0)", color: "#D3CCE3" },
-            "Libra": { grad: "linear-gradient(to bottom, #c471f5, #fa71cd)", color: "#fa71cd" },
-            "Scorpio": { grad: "linear-gradient(to bottom, #800000, #ff0000)", color: "#ff4d4d" },
-            "Sagittarius": { grad: "linear-gradient(to bottom, #8E2DE2, #4A00E0)", color: "#bd7dfc" },
-            "Capricorn": { grad: "linear-gradient(to bottom, #3E5151, #DECBA4)", color: "#DECBA4" },
-            "Aquarius": { grad: "linear-gradient(to bottom, #00c6ff, #0072ff)", color: "#00c6ff" },
-            "Pisces": { grad: "linear-gradient(to bottom, #00d2ff, #3a7bd5)", color: "#00d2ff" }
-        };
+    <footer>
+        <div class="logo" style="justify-content: center; margin-bottom: 10px;">XIZOAHUB</div>
+        <p>Professional tools for content creators and developers. Built for performance.</p>
+        <div class="social-links">
+            <a href="#">About</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">© 2024-2025 XizoaHub. All Rights Reserved.<br>Created & Designed by Priyanshu</p>
+    </footer>
 
-        const bios = [
-            "Just getting cooler with age. 😎", "Limited Edition. ✨", "Vibe hai bhai ki. 🚀", 
-            "Not old, just classic. 💯", "Collecting moments. 📸", "Main apni favourite hoon. 💃"
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script>
+        // --- MOTIVATION DATABASE (Extendable) ---
+        // Tum yahan aur quotes add kar sakte ho. Bas comma laga kar new line likh dena.
+        const quotes = [
+            "Waqt unka hota hai, jo waqt ki kadar karte hain.",
+            "Dream big, work hard, stay humble.",
+            "Sher shikaar kare na kare, kutton se darta nahi.",
+            "Apna time aayega nahi, apna time lana padta hai.",
+            "Mehnat itni khamoshi se karo ki safalta shor macha de.",
+            "Gold ki tarah chamakna hai to aag mein tapna padega.",
+            "King wo nahi jo raaj kare, King wo hai jo dil jeete.",
+            "Focus on your goal, blur everything else.",
+            "Zindagi ek game hai, ise pro player ki tarah khelo.",
+            "Haar tab hoti hai jab maan liya jaye, jeet tab hoti hai jab thaan liya jaye.",
+            "Your attitude determines your direction.",
+            "Don't stop when you're tired. Stop when you're done.",
+            "Badshah banne ke liye ghulamo ki tarah mehnat karni padti hai.",
+            "Risk hai toh ishq hai, life mein risk lena seekho.",
+            "Success has no shortcut.",
+            "Be a voice, not an echo.",
+            "Udne mein burayi nahi hai, par wahi udo jahan se zameen saaf dikhai de.",
+            "Jalo mat, barabari karo.",
+            "Silence is the best answer to a fool.",
+            "Create the life you can't wait to wake up to.",
+            "Hustle in silence, let success make the noise.",
+            "Champions keep playing until they get it right.",
+            "Paisa wahi kamata hai jo dimaag lagata hai.",
+            "Aukaat ki baat mat kar, teri aukaat se bada mera sapna hai.",
+            "Believe in yourself and you will be unstoppable.",
+            "Stay hungry, stay foolish.",
+            "Winners never quit and quitters never win.",
+            "Aaj ka dard kal ki taqat hai.",
+            "Sapne wo nahi jo sote waqt aaye, sapne wo hai jo sone na de.",
+            "Make it happen, shock everyone."
         ];
 
-        function previewFile() {
-            const file = document.querySelector('input[type=file]').files[0];
-            if (file) {
-                document.getElementById('uploadText').innerText = "✅ " + file.name;
-                document.querySelector('.btn-upload').style.borderColor = "#3b82f6";
-            }
+        // --- 24 TEMPLATE GENERATOR LOGIC ---
+        // Ye function mathematically random combination banata hai
+        function getRandomStyle() {
+            const directions = ['to right', 'to bottom right', 'to bottom', '135deg'];
+            
+            // Gold/Premium Color Palettes
+            const palettes = [
+                ['#BF953F', '#FCF6BA', '#B38728', '#FBF5B7', '#AA771C'], // Classic Gold
+                ['#D4AF37', '#C5A028', '#FFD700'], // Deep Gold
+                ['#fceabb', '#f8b500'], // Sunset Gold
+                ['#FDC830', '#F37335'], // Orange Gold
+                ['#1e130c', '#9a8478'], // Luxury Black/Gold
+                ['#ECE9E6', '#FFFFFF', '#D4AF37'], // White Gold
+                ['#141E30', '#243B55', '#D4AF37'], // Royal Blue Gold
+                ['#000000', '#434343', '#FFD700']  // Carbon Gold
+            ];
+
+            const randDir = directions[Math.floor(Math.random() * directions.length)];
+            const randPal = palettes[Math.floor(Math.random() * palettes.length)];
+            
+            // Convert palette array to CSS gradient string
+            let gradientStr = `linear-gradient(${randDir}, `;
+            gradientStr += randPal.join(', ') + ')';
+
+            // Border styles
+            const borders = [
+                '4px solid #fff', 
+                '4px double #FFD700', 
+                '2px solid rgba(255,255,255,0.5)'
+            ];
+            const randBorder = borders[Math.floor(Math.random() * borders.length)];
+
+            return {
+                background: gradientStr,
+                border: randBorder,
+                textColor: (randPal[0] === '#141E30' || randPal[0] === '#000000' || randPal[0] === '#1e130c') ? '#fff' : '#000'
+            };
         }
 
+        // --- MAIN FUNCTIONALITY ---
         function generateCard() {
-            const name = document.getElementById('nameInput').value || "User";
-            let insta = document.getElementById('instaInput').value || "@user";
-            if(!insta.startsWith('@')) insta = '@' + insta;
-            const dobInput = document.getElementById('dobInput').value;
+            const name = document.getElementById('userName').value;
+            const dobInput = document.getElementById('userDob').value;
+            const insta = document.getElementById('userInsta').value;
+            const photoInput = document.getElementById('userPhoto');
 
-            if(!dobInput) { alert("Please select Date of Birth!"); return; }
-
-            // Photo Logic
-            const file = document.querySelector('input[type=file]').files[0];
-            const img = document.getElementById('cardImg');
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = function () { img.src = reader.result; }
-                reader.readAsDataURL(file);
+            if(!name || !dobInput || !insta) {
+                alert("Arre bhai! Naam, DOB aur Insta ID to daalo pehle.");
+                return;
             }
 
-            // Calculations
+            // 1. Calculate Age
             const dob = new Date(dobInput);
-            const today = new Date();
-            if (dob > today) { alert("Future date not allowed"); return; }
-
-            let years = today.getFullYear() - dob.getFullYear();
-            let months = today.getMonth() - dob.getMonth();
-            let days = today.getDate() - dob.getDate();
-            if (days < 0) { months--; days += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
-            if (months < 0) { years--; months += 12; }
-
-            const currentYear = today.getFullYear();
-            let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
-            if (today > nextBirthday) nextBirthday.setFullYear(currentYear + 1);
-            const nextDays = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+            const now = new Date();
             
-            const zDay = dob.getDate(); const zMonth = dob.getMonth() + 1;
-            let zodiac = getZodiac(zDay, zMonth);
-            
-            // --- APPLY THEME ---
-            const currentTheme = themes[zodiac] || themes["Leo"];
-            
-            // Apply Colors
-            document.getElementById('themeBanner').style.background = currentTheme.grad;
-            document.querySelector('.card-frame').style.background = currentTheme.grad;
-            document.getElementById('profileRing').style.background = currentTheme.grad;
-            
-            // FIX: Set Text Color directly (No Background)
-            const handle = document.getElementById('outInsta');
-            handle.style.color = currentTheme.color;
-            handle.style.background = "none"; 
+            let years = now.getFullYear() - dob.getFullYear();
+            let months = now.getMonth() - dob.getMonth();
+            let days = now.getDate() - dob.getDate();
 
-            // Update Text
-            document.getElementById('outName').innerText = name;
-            document.getElementById('outInsta').innerText = insta;
-            document.getElementById('outYears').innerText = years;
-            document.getElementById('outMonths').innerText = months;
-            document.getElementById('outDays').innerText = days;
-            document.getElementById('outZodiac').innerText = zodiac;
-            document.getElementById('outNextBday').innerText = nextDays + " Days";
-            document.getElementById('zodiacIcon').innerText = getZodiacIcon(zodiac);
-            document.getElementById('outBio').innerText = `"${bios[Math.floor(Math.random() * bios.length)]}"`;
+            if (days < 0) {
+                months--;
+                days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
 
-            document.getElementById('resultSection').style.display = "block";
-            setTimeout(() => { document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' }); }, 100);
-        }
+            // 2. Update Text
+            document.getElementById('cardName').innerText = name;
+            document.getElementById('cardAge').innerText = `${years} Years • ${months} Months • ${days} Days`;
+            document.getElementById('cardInsta').innerText = '@' + insta.replace('@', '');
 
-        function getZodiac(d, m) {
-            if((m==1 && d>=20)||(m==2 && d<=18)) return "Aquarius";
-            if((m==2 && d>=19)||(m==3 && d<=20)) return "Pisces";
-            if((m==3 && d>=21)||(m==4 && d<=19)) return "Aries";
-            if((m==4 && d>=20)||(m==5 && d<=20)) return "Taurus";
-            if((m==5 && d>=21)||(m==6 && d<=20)) return "Gemini";
-            if((m==6 && d>=21)||(m==7 && d<=22)) return "Cancer";
-            if((m==7 && d>=23)||(m==8 && d<=22)) return "Leo";
-            if((m==8 && d>=23)||(m==9 && d<=22)) return "Virgo";
-            if((m==9 && d>=23)||(m==10 && d<=22)) return "Libra";
-            if((m==10 && d>=23)||(m==11 && d<=21)) return "Scorpio";
-            if((m==11 && d>=22)||(m==12 && d<=21)) return "Sagittarius";
-            return "Capricorn";
-        }
+            // 3. Update Photo
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('cardImg').src = e.target.result;
+                }
+                reader.readAsDataURL(photoInput.files[0]);
+            }
 
-        function getZodiacIcon(sign) {
-            const icons = { "Aries": "♈", "Taurus": "♉", "Gemini": "♊", "Cancer": "♋", "Leo": "♌", "Virgo": "♍", "Libra": "♎", "Scorpio": "♏", "Sagittarius": "♐", "Capricorn": "♑", "Aquarius": "♒", "Pisces": "♓" };
-            return icons[sign] || "✨";
-        }
+            // 4. Random Motivation
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('cardQuote').innerText = `"${randomQuote}"`;
 
-        function downloadCard() {
-            const card = document.getElementById('downloadArea');
-            const btn = document.querySelector('.dl-btn');
-            const wm = document.getElementById('watermarkTag');
+            // 5. Apply Random Premium Style (The "24 Templates" Logic)
+            const style = getRandomStyle();
+            const card = document.getElementById('cardPreview');
             
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "Processing...";
-            wm.style.display = 'none';
-            
-            html2canvas(card, { 
-                scale: 3, 
-                backgroundColor: null, // Transparent to avoid corner issues
-                useCORS: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'Xizoa-Zodiac-Card.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                
-                wm.style.display = 'block';
-                btn.innerHTML = originalText;
-            });
-        }
-    </script>
-</body>
-</html>
+            card.style.background = style.background;
+            card.style.border = style.
